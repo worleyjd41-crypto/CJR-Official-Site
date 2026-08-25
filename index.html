@@ -53,54 +53,19 @@ body{
 /* (hero background animation removed; page-level gradient handles ambient color)
    keyframes for section-level gradients are intentionally omitted */
 
-@media (prefers-reduced-motion: reduce){
-  /* Respect reduced motion: show static flat background */
-  body{background: #F8F4EF; background-image: none; animation: none}
+body{
+  background: #F8F4EF;
+  min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  /* Full-page animated gradient on the body */
-  body{
-    background: linear-gradient(135deg, #F8F4EF, #EDE6DB, #E8D9CC, #E4EBE4, #F0E8DC, #EDE6DB, #F8F4EF);
-    animation: bgFilter 18s ease-in-out infinite;
-    min-height: 100vh;
-  }
-
-  /* Organic wavy translucent overlay that drifts and pulses */
-  body::before{
-    content: "";
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-    background:
-      radial-gradient(60% 40% at 10% 15%, rgba(184,113,78,0.60) 0%, transparent 45%),
-      radial-gradient(80% 50% at 85% 85%, rgba(122,158,126,0.58) 0%, transparent 40%),
-      radial-gradient(70% 45% at 55% 45%, rgba(217,191,176,0.60) 0%, transparent 50%),
-      radial-gradient(50% 50% at 30% 70%, rgba(184,113,78,0.45) 0%, transparent 50%);
-    filter: blur(80px);
-    animation: driftB 32s ease-in-out infinite;
-    opacity:1;
-    mix-blend-mode: overlay;
-    will-change: transform;
-  }
-
-  @keyframes bgFilter {
-    0%   { filter: saturate(0.95) hue-rotate(0deg); }
-    25%  { filter: saturate(1.05) hue-rotate(8deg); }
-    50%  { filter: saturate(1.0) hue-rotate(0deg); }
-    75%  { filter: saturate(0.98) hue-rotate(-5deg); }
-    100% { filter: saturate(0.95) hue-rotate(0deg); }
-  }
-
-  @keyframes driftB {
-    0%   { transform: translate(0%, 0%) scale(1); }
-    20%  { transform: translate(12%, -8%) scale(1.08); }
-    40%  { transform: translate(-10%, 6%) scale(0.98); }
-    60%  { transform: translate(8%, -4%) scale(1.05); }
-    80%  { transform: translate(-6%, 3%) scale(0.97); }
-    100% { transform: translate(0%, 0%) scale(1); }
-  }
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #F8F4EF;
+  opacity: 1;
 }
 
 /* Work grid */
