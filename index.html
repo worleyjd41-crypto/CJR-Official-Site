@@ -39,10 +39,16 @@ body{
 .site-logo{height:44px;width:auto;display:block;color:var(--text);opacity:0.95}
 @media (max-width:600px){
   .site-logo{height:34px}
-  .site-header .brand .brand-text{font-size:1rem}
+  .site-header .header-inner{gap:.75rem;padding:0 .25rem}
+  .site-header .brand .brand-text{font-size:1rem;white-space:nowrap}
+  .site-header.visible{background:rgba(248,244,239,.96);backdrop-filter:none;border-bottom:1px solid rgba(51,43,36,.05)}
+  .main-nav{display:flex;align-items:center;gap:.5rem;flex-wrap:nowrap}
+  .main-nav a{margin-left:0;font-size:.62rem;letter-spacing:.08em}
+  .modal-backdrop{background:rgba(248,244,239,.7)}
 }
+.main-nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap}
 .main-nav a{margin-left:1rem;text-decoration:none;color:var(--text);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
-.site-header.visible{background:rgba(248,244,239,.5);backdrop-filter:blur(12px)}
+.site-header.visible{background:rgba(248,244,239,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(51,43,36,.05)}
 
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}
 .hero-inner{position:relative;z-index:2;text-align:center;padding:4rem 1rem}
@@ -131,12 +137,14 @@ main, nav{position:relative;z-index:1}
 .site-footer{padding:6rem 0 8rem;color:rgba(51,43,36,.6);text-align:center}
 
 /* Modal */
-.piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
 .piece-modal.active{opacity:1;pointer-events:auto}
-.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(4px)}
-.modal-content{position:relative;z-index:101;background:rgba(248,244,239,.7);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:modalSlideIn .35s ease;-webkit-overflow-scrolling:touch}
-.modal-close{position:absolute;top:1rem;right:1rem;z-index:102;background:rgba(255,255,255,.9);border:0;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:background .2s ease;flex-shrink:0}
-.modal-close:hover{background:white}
+.modal-backdrop{position:absolute;inset:0;background:rgba(248,244,239,.55);backdrop-filter:blur(2px);opacity:0;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
+.piece-modal.active .modal-backdrop{opacity:1}
+.modal-content{position:relative;z-index:101;background:rgba(255,255,255,.82);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);transform:scale(.96) translateY(18px);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s cubic-bezier(.22,1,.36,1);will-change:transform,opacity;-webkit-overflow-scrolling:touch}
+.piece-modal.active .modal-content{transform:scale(1) translateY(0);opacity:1}
+.modal-close{position:absolute;top:1rem;right:1rem;z-index:102;background:rgba(255,255,255,.9);border:0;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:background .2s ease,transform .2s ease;flex-shrink:0}
+.modal-close:hover{background:white;transform:scale(1.04)}
 .modal-image-container{background:var(--surface);display:flex;align-items:center;justify-content:center;padding:2rem;border-radius:0;overflow:hidden}
 .modal-image{width:100%;aspect-ratio:1;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
 .modal-slider{display:flex;align-items:center;gap:.5rem;width:100%;max-width:900px}
@@ -150,7 +158,7 @@ main, nav{position:relative;z-index:1}
 .modal-description{font-size:1rem;line-height:1.6;color:var(--text);margin:0;opacity:.85}
  .modal-actions{margin-top:1.25rem;display:flex;gap:.75rem}
  .modal-actions .pill{padding:.6rem 1rem}
-@keyframes modalSlideIn{from{transform:scale(.95) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+@keyframes modalSlideIn{from{transform:scale(.96) translateY(18px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
 @media (max-width:900px){
   .modal-content{grid-template-columns:1fr;max-height:calc(100vh - 1rem)}
   .modal-image-container{padding:1rem}
@@ -178,7 +186,6 @@ main, nav{position:relative;z-index:1}
 }
 @media (max-width:600px){
   .hero-title{font-size:3rem}
-  .main-nav{display:none}
   .site-header .brand{font-size:1rem}
   .hero-inner{padding:3rem 1rem}
 }
@@ -315,21 +322,53 @@ main, nav{position:relative;z-index:1}
 
   <script>
   (function(){
-    // Sticky header: show when hero is out of view
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
     const hero = document.getElementById('hero');
     const header = document.getElementById('site-header');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) {
-          header.classList.add('visible');
-          header.setAttribute('aria-hidden','false');
-        } else {
-          header.classList.remove('visible');
-          header.setAttribute('aria-hidden','true');
+    let forceHeaderHidden = false;
+
+    function hideHeader() {
+      header.classList.remove('visible');
+      header.setAttribute('aria-hidden', 'true');
+    }
+
+    function showHeader() {
+      header.classList.add('visible');
+      header.setAttribute('aria-hidden', 'false');
+    }
+
+    function updateHeaderByPointer(yPos) {
+      if (forceHeaderHidden) {
+        hideHeader();
+        return;
+      }
+      if (yPos < 80) {
+        showHeader();
+      } else {
+        hideHeader();
+      }
+    }
+
+    document.addEventListener('pointermove', function(e) {
+      updateHeaderByPointer(e.clientY);
+    });
+
+    document.addEventListener('mouseleave', function() {
+      hideHeader();
+    });
+
+    document.addEventListener('pointerleave', function() {
+      hideHeader();
+    });
+
+    if (hero) {
+      hero.addEventListener('pointerenter', function() {
+        if (!forceHeaderHidden) {
+          hideHeader();
         }
       });
-    }, { rootMargin: '-20% 0px 0px 0px' });
-    observer.observe(hero);
+    }
 
     // Form: open mailto with the details
     const form = document.getElementById('commission-form');
@@ -410,6 +449,10 @@ main, nav{position:relative;z-index:1}
       const description = card.dataset.description || 'Beautiful hand-turned piece.';
       const imagesAttr = card.dataset.images || "";
 
+      forceHeaderHidden = true;
+      header.classList.remove('visible');
+      header.setAttribute('aria-hidden', 'true');
+
       const scrollY = window.scrollY || window.pageYOffset;
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
@@ -473,6 +516,7 @@ main, nav{position:relative;z-index:1}
     function closeModal() {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
+      forceHeaderHidden = false;
       const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
       document.body.style.overflow = '';
       document.body.style.position = '';
