@@ -131,20 +131,20 @@ main, nav{position:relative;z-index:1}
 .site-footer{padding:6rem 0 8rem;color:rgba(51,43,36,.6);text-align:center}
 
 /* Modal */
-.piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s ease}
 .piece-modal.active{opacity:1;pointer-events:auto}
 .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(4px)}
-.modal-content{position:relative;z-index:101;background:rgba(248,244,239,.7);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:90vh;display:grid;grid-template-columns:1.6fr 1fr;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:modalSlideIn .35s ease}
+.modal-content{position:relative;z-index:101;background:rgba(248,244,239,.7);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:modalSlideIn .35s ease;-webkit-overflow-scrolling:touch}
 .modal-close{position:absolute;top:1rem;right:1rem;z-index:102;background:rgba(255,255,255,.9);border:0;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:background .2s ease;flex-shrink:0}
 .modal-close:hover{background:white}
-.modal-image-container{background:var(--surface);display:flex;align-items:center;justify-content:center;padding:2rem;border-radius:0}
+.modal-image-container{background:var(--surface);display:flex;align-items:center;justify-content:center;padding:2rem;border-radius:0;overflow:hidden}
 .modal-image{width:100%;aspect-ratio:1;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
 .modal-slider{display:flex;align-items:center;gap:.5rem;width:100%;max-width:900px}
 .slider-prev,.slider-next{background:rgba(255,255,255,.95);border:0;border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;color:var(--text);box-shadow:0 6px 18px rgba(0,0,0,0.12)}
 .slider-track{flex:1;overflow:hidden;border-radius:14px}
 .slider-track-inner{display:flex;transition:transform .35s ease}
 .slider-track-inner .slide{flex:0 0 100%;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px}
-.slider-track img{max-height:calc(80vh - 120px);max-width:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:12px}
+.slider-track img{max-height:calc(80vh - 120px);max-width:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:12px;overflow:hidden}
 .modal-info{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;letter-spacing:.04em;margin:0 0 1rem;color:var(--text)}
 .modal-description{font-size:1rem;line-height:1.6;color:var(--text);margin:0;opacity:.85}
@@ -152,7 +152,7 @@ main, nav{position:relative;z-index:1}
  .modal-actions .pill{padding:.6rem 1rem}
 @keyframes modalSlideIn{from{transform:scale(.95) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
 @media (max-width:900px){
-  .modal-content{grid-template-columns:1fr;max-height:90vh}
+  .modal-content{grid-template-columns:1fr;max-height:calc(100vh - 1rem)}
   .modal-image-container{padding:1rem}
   .modal-info{padding:1.25rem}
   .modal-slider{max-width:100%}
@@ -160,9 +160,11 @@ main, nav{position:relative;z-index:1}
   .slider-track img{height:48vh}
 }
 @media (max-width:600px){
-  .modal-content{max-width:90vw;border-radius:16px}
-  .modal-image-container{padding:1rem;min-height:300px}
-  .modal-image{aspect-ratio:1}
+  .piece-modal{padding:.5rem}
+  .modal-content{max-width:90vw;border-radius:16px;max-height:calc(100vh - 1rem)}
+  .modal-image-container{padding:1rem;min-height:300px;border-radius:12px;overflow:hidden}
+  .modal-image{aspect-ratio:1;border-radius:12px}
+  .slider-track,.slider-track-inner,.slider-track-inner .slide,.slider-track img{border-radius:12px}
   .modal-info{padding:1.5rem}
   .modal-title{font-size:1.5rem}
   .modal-description{font-size:.95rem}
@@ -408,6 +410,13 @@ main, nav{position:relative;z-index:1}
       const description = card.dataset.description || 'Beautiful hand-turned piece.';
       const imagesAttr = card.dataset.images || "";
 
+      const scrollY = window.scrollY || window.pageYOffset;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = '-' + scrollY + 'px';
+      document.body.style.left = '0';
+
       modalTitle.textContent = species;
       modalDescription.textContent = description;
 
@@ -464,6 +473,13 @@ main, nav{position:relative;z-index:1}
     function closeModal() {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
+      const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      window.scrollTo(0, scrollY);
       // cleanup keyboard handler
       if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
       // clear images
