@@ -19,7 +19,7 @@
 
 /* Base */
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;background:#F8F4EF;color-scheme:light;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:auto;background:#F8F4EF;color-scheme:light;-webkit-tap-highlight-color:transparent}
 body{
   margin:0;
   font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
@@ -145,12 +145,15 @@ main, nav{position:relative;z-index:1}
 }
 
 /* Modal */
-.piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
+.piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .42s cubic-bezier(.22,1,.36,1)}
 .piece-modal.active{opacity:1;pointer-events:auto}
-.modal-backdrop{position:absolute;inset:0;background:rgba(248,244,239,.88);backdrop-filter:none;opacity:0;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
+.piece-modal.closing{opacity:0;pointer-events:none}
+.modal-backdrop{position:absolute;inset:0;background:rgba(248,244,239,.88);backdrop-filter:none;opacity:0;transition:opacity .42s cubic-bezier(.22,1,.36,1)}
 .piece-modal.active .modal-backdrop{opacity:1}
-.modal-content{position:relative;z-index:101;background:rgba(255,255,255,.96);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);transform:scale(.96) translateY(18px);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s cubic-bezier(.22,1,.36,1);will-change:transform,opacity;-webkit-overflow-scrolling:touch}
+.piece-modal.closing .modal-backdrop{opacity:0}
+.modal-content{position:relative;z-index:101;background:rgba(255,255,255,.96);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);transform:scale(.96) translateY(18px);opacity:0;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s cubic-bezier(.22,1,.36,1);will-change:transform,opacity;-webkit-overflow-scrolling:touch}
 .piece-modal.active .modal-content{transform:scale(1) translateY(0);opacity:1}
+.piece-modal.closing .modal-content{transform:scale(.96) translateY(18px);opacity:0}
 .modal-close{position:absolute;top:1rem;right:1rem;z-index:102;background:rgba(255,255,255,.9);border:0;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:background .2s ease,transform .2s ease;flex-shrink:0}
 .modal-close:hover{background:white;transform:scale(1.04)}
 .modal-image-container{background:var(--surface);display:flex;align-items:center;justify-content:center;padding:2rem;border-radius:0;overflow:hidden}
@@ -427,7 +430,21 @@ main, nav{position:relative;z-index:1}
         window.scrollTo(0, top);
         history.pushState(null, '', hash);
       } else {
-        window.scrollTo({ top: top, behavior: 'smooth' });
+        const start = window.pageYOffset;
+        const distance = top - start;
+        const duration = Math.min(900, Math.max(450, Math.abs(distance) * 0.7));
+        const startTime = performance.now();
+        const easeInOut = progress => progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+        function animateScroll(currentTime) {
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          window.scrollTo(0, start + distance * easeInOut(progress));
+          if (progress < 1) window.requestAnimationFrame(animateScroll);
+        }
+
+        window.requestAnimationFrame(animateScroll);
         try { history.pushState(null, '', hash); } catch (e) { /* ignore */ }
       }
     }
@@ -464,6 +481,7 @@ main, nav{position:relative;z-index:1}
     let inquireHandler = null;
 
     function openModal(card) {
+      modal.classList.remove('closing');
       const species = card.dataset.species;
       const description = card.dataset.description || 'Beautiful hand-turned piece.';
       const imagesAttr = card.dataset.images || "";
@@ -533,25 +551,33 @@ main, nav{position:relative;z-index:1}
     }
 
     function closeModal() {
+      if (!modal.classList.contains('active')) return;
+
       modal.classList.remove('active');
+      modal.classList.add('closing');
       modal.setAttribute('aria-hidden', 'true');
+
       forceHeaderHidden = false;
-      const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      window.scrollTo(0, scrollY);
-      // cleanup keyboard handler
-      if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
-      // clear images
-      sliderTrack.innerHTML = '';
-      currentImages = [];
-      currentIndex = 0;
-      // cleanup inquire handler
-      const inquireBtn = document.getElementById('modal-inquire');
-      if (inquireBtn && inquireHandler) { inquireBtn.removeEventListener('click', inquireHandler); inquireHandler = null; }
+
+      setTimeout(function(){
+        modal.classList.remove('closing');
+
+        const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        window.scrollTo(0, scrollY);
+
+        if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
+        sliderTrack.innerHTML = '';
+        currentImages = [];
+        currentIndex = 0;
+
+        const inquireBtn = document.getElementById('modal-inquire');
+        if (inquireBtn && inquireHandler) { inquireBtn.removeEventListener('click', inquireHandler); inquireHandler = null; }
+      }, 420);
     }
 
     function updateSlider(){
