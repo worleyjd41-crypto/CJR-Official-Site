@@ -19,14 +19,16 @@
 
 /* Base */
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:#F8F4EF;color-scheme:light;-webkit-tap-highlight-color:transparent}
 body{
   margin:0;
   font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
   color:var(--text);
   background:var(--bg);
   -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
 }
+img,figure,button,a{ -webkit-tap-highlight-color:transparent; }
 .container{max-width:1100px;margin:0 auto;padding:2rem}
 .narrow{max-width:520px}
 
@@ -41,14 +43,15 @@ body{
   .site-logo{height:34px}
   .site-header .header-inner{gap:.75rem;padding:0 .25rem}
   .site-header .brand .brand-text{font-size:1rem;white-space:nowrap}
-  .site-header.visible{background:rgba(248,244,239,.96);backdrop-filter:none;border-bottom:1px solid rgba(51,43,36,.05)}
+  .site-header.visible{background:#F8F4EF;backdrop-filter:none;border-bottom:1px solid rgba(51,43,36,.05)}
   .main-nav{display:flex;align-items:center;gap:.5rem;flex-wrap:nowrap}
   .main-nav a{margin-left:0;font-size:.62rem;letter-spacing:.08em}
-  .modal-backdrop{background:rgba(248,244,239,.7)}
+  .modal-backdrop{background:rgba(248,244,239,.96);backdrop-filter:none}
+  .card,.card:focus,.card:active{-webkit-tap-highlight-color:transparent;outline:none}
 }
 .main-nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap}
 .main-nav a{margin-left:1rem;text-decoration:none;color:var(--text);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
-.site-header.visible{background:rgba(248,244,239,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(51,43,36,.05)}
+.site-header.visible{background:rgba(248,244,239,.72);backdrop-filter:blur(10px);border-bottom:1px solid rgba(51,43,36,.05)}
 
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}
 .hero-inner{position:relative;z-index:2;text-align:center;padding:4rem 1rem}
@@ -139,9 +142,9 @@ main, nav{position:relative;z-index:1}
 /* Modal */
 .piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
 .piece-modal.active{opacity:1;pointer-events:auto}
-.modal-backdrop{position:absolute;inset:0;background:rgba(248,244,239,.55);backdrop-filter:blur(2px);opacity:0;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
+.modal-backdrop{position:absolute;inset:0;background:rgba(248,244,239,.88);backdrop-filter:none;opacity:0;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
 .piece-modal.active .modal-backdrop{opacity:1}
-.modal-content{position:relative;z-index:101;background:rgba(255,255,255,.82);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);transform:scale(.96) translateY(18px);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s cubic-bezier(.22,1,.36,1);will-change:transform,opacity;-webkit-overflow-scrolling:touch}
+.modal-content{position:relative;z-index:101;background:rgba(255,255,255,.96);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);transform:scale(.96) translateY(18px);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s cubic-bezier(.22,1,.36,1);will-change:transform,opacity;-webkit-overflow-scrolling:touch}
 .piece-modal.active .modal-content{transform:scale(1) translateY(0);opacity:1}
 .modal-close{position:absolute;top:1rem;right:1rem;z-index:102;background:rgba(255,255,255,.9);border:0;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:background .2s ease,transform .2s ease;flex-shrink:0}
 .modal-close:hover{background:white;transform:scale(1.04)}
@@ -216,7 +219,7 @@ main, nav{position:relative;z-index:1}
     <section class="hero" id="hero">
       <div class="hero-inner">
         <h1 class="hero-title">Crossing J Workshop</h1>
-        <p class="hero-tag">My dad and I make these.</p>
+        <p class="hero-tag">Made in the Hill Country.</p>
         <a class="pill-outline" href="#work">See the work</a>
       </div>
     </section>
@@ -265,7 +268,7 @@ main, nav{position:relative;z-index:1}
 
     <section id="about" class="about">
       <div class="container narrow">
-        <p>We make custom pieces locally in Bulverde, Texas — handcrafting quality items from wood and epoxy. We accept commissions and will work with you to create a unique, handmade piece. Many pieces have already been sold or commissioned; use the "Inquire" button in any tile to email us about creating a similar piece.</p>
+        <p>We make custom pieces locally in the Texas Hill Country — handcrafting quality items from wood and epoxy. We accept commissions and will work with you to create a unique, handmade piece. Many pieces have already been sold or commissioned; use the "Inquire" button in any tile to email us about creating a similar piece.</p>
       </div>
     </section>
 
