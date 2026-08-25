@@ -137,14 +137,6 @@ main, nav{position:relative;z-index:1}
 @media (max-width:900px){.card.fossil-lamp{grid-column:auto}}
 @media (max-width:900px){.card.split-right{grid-column:auto}}
 
-/* Multiple float keyframes for molecular-like independent motion */
-@keyframes float-1{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(6px,-4px,0)}50%{transform:translate3d(0,-8px,0)}75%{transform:translate3d(-6px,-4px,0)}100%{transform:translate3d(0,0,0)}}
-@keyframes float-2{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(-4px,6px,0)}50%{transform:translate3d(-8px,0,0)}75%{transform:translate3d(-4px,-6px,0)}100%{transform:translate3d(0,0,0)}}
-@keyframes float-3{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(8px,2px,0)}50%{transform:translate3d(0,6px,0)}75%{transform:translate3d(-8px,2px,0)}100%{transform:translate3d(0,0,0)}}
-@keyframes float-4{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(4px,-6px,0)}50%{transform:translate3d(6px,-2px,0)}75%{transform:translate3d(2px,4px,0)}100%{transform:translate3d(0,0,0)}}
-@keyframes float-5{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(-6px,3px,0)}50%{transform:translate3d(-2px,-6px,0)}75%{transform:translate3d(6px,-2px,0)}100%{transform:translate3d(0,0,0)}}
-@keyframes float-6{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(3px,5px,0)}50%{transform:translate3d(-6px,4px,0)}75%{transform:translate3d(-3px,-5px,0)}100%{transform:translate3d(0,0,0)}}
-
 /* Palette fills for placeholders */
 .card:nth-child(1){background:linear-gradient(180deg,var(--accent),#974f3a)}
 .card:nth-child(2){background:linear-gradient(180deg,var(--accent-2),#658a6b)}
@@ -566,16 +558,6 @@ main, nav{position:relative;z-index:1}
       }
     });
 
-    // Give each card a slightly different floating animation (molecular motion)
-    if (!prefersReducedMotion()) {
-      const cardEls = document.querySelectorAll('.card');
-      cardEls.forEach((el, i) => {
-        const n = (i % 6) + 1; // pick float-1..float-6
-        const duration = (5 + Math.random() * 4).toFixed(2); // 5-9s
-        const delay = (Math.random() * 3).toFixed(2);
-        el.style.animation = `float-${n} ${duration}s ease-in-out ${delay}s infinite`;
-      });
-    }
   })();
   </script>
 </body>
