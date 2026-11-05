@@ -1,219 +1,863 @@
-
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Crossing J Workshop</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
   <style>
-:root{
-  --bg: #F8F4EF;
-  --accent: #B8714E;
-  --accent-2: #7A9E7E;
-  --surface: #EDE6DB;
-  --blush: #D9BFB0;
-  --text: #332B24;
-}
+    :root {
+      --bg: #F8F4EF;
+      --accent: #B8714E;
+      --accent-2: #7A9E7E;
+      --surface: #EDE6DB;
+      --blush: #D9BFB0;
+      --text: #332B24;
+    }
 
-/* Base */
-*{box-sizing:border-box}
-html{scroll-behavior:auto;background:#F8F4EF;color-scheme:light;-webkit-tap-highlight-color:transparent}
-body{
-  margin:0;
-  font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
-  color:var(--text);
-  background:var(--bg);
-  -webkit-font-smoothing:antialiased;
-  -webkit-tap-highlight-color:transparent;
-}
-img,figure,button,a{ -webkit-tap-highlight-color:transparent; }
-.container{max-width:1100px;margin:0 auto;padding:2rem}
-.narrow{max-width:520px}
+    /* Base */
+    * {
+      box-sizing: border-box
+    }
 
-/* Header / Nav */
-.site-header{position:fixed;left:0;right:0;top:0;padding:.6rem 1rem;z-index:40;opacity:0;transform:translateY(-8px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
-.site-header.visible{opacity:1;transform:none;pointer-events:auto}
-.site-header .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:0 1rem}
-.site-header .brand{display:flex;align-items:center;gap:.6rem}
-.site-header .brand .brand-text{font-family:'Cormorant Garamond', serif;font-weight:300;letter-spacing:.04em}
-.site-logo{height:44px;width:auto;display:block;color:var(--text);opacity:0.95}
-@media (max-width:600px){
-  .site-logo{height:34px}
-  .site-header .header-inner{gap:.75rem;padding:0 .25rem}
-  .site-header .brand .brand-text{font-size:1rem;white-space:nowrap}
-  .site-header.visible{background:#F8F4EF;backdrop-filter:none;border-bottom:1px solid rgba(51,43,36,.05)}
-  .main-nav{display:flex;align-items:center;gap:.5rem;flex-wrap:nowrap}
-  .main-nav a{margin-left:0;font-size:.62rem;letter-spacing:.08em}
-  .modal-backdrop{background:rgba(248,244,239,.96);backdrop-filter:none}
-  .card,.card:focus,.card:active{-webkit-tap-highlight-color:transparent;outline:none}
-}
-.main-nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap}
-.main-nav a{margin-left:1rem;text-decoration:none;color:var(--text);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
-.site-header.visible{background:rgba(248,244,239,.72);backdrop-filter:blur(10px);border-bottom:1px solid rgba(51,43,36,.05)}
+    html {
+      scroll-behavior: auto;
+      background: #F8F4EF;
+      color-scheme: light;
+      -webkit-tap-highlight-color: transparent
+    }
 
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}
-.hero-inner{position:relative;z-index:2;text-align:center;padding:4rem 1rem}
-.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:5.5rem;margin:0;letter-spacing:.04em;color:var(--text)}
-.hero-tag{margin-top:1rem;color:var(--accent);font-size:.95rem;letter-spacing:.12em;font-weight:500;text-transform:none}
-.pill-outline{display:inline-block;margin-top:1.6rem;padding:.7rem 1.2rem;border-radius:100px;border:1px solid rgba(51,43,36,.08);background:transparent;color:var(--text);text-decoration:none;font-weight:500}
+    body {
+      margin: 0;
+      font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-/* (hero background animation removed; page-level gradient handles ambient color)
+    img,
+    figure,
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem
+    }
+
+    .narrow {
+      max-width: 520px
+    }
+
+    /* Header / Nav */
+    .site-header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      padding: .6rem 1rem;
+      z-index: 40;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity .35s ease, transform .35s ease;
+      pointer-events: none
+    }
+
+    .site-header.visible {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto
+    }
+
+    .site-header .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem
+    }
+
+    .site-header .brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem
+    }
+
+    .site-header .brand .brand-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      letter-spacing: .04em
+    }
+
+    .site-logo {
+      height: 44px;
+      width: auto;
+      display: block;
+      color: var(--text);
+      opacity: 0.95
+    }
+
+    @media (max-width:600px) {
+      .site-logo {
+        height: 34px
+      }
+
+      .site-header .header-inner {
+        gap: .75rem;
+        padding: 0 .25rem
+      }
+
+      .site-header .brand .brand-text {
+        font-size: 1rem;
+        white-space: nowrap
+      }
+
+      .site-header.visible {
+        background: #F8F4EF;
+        backdrop-filter: none;
+        border-bottom: 1px solid rgba(51, 43, 36, .05)
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        flex-wrap: nowrap
+      }
+
+      .main-nav a {
+        margin-left: 0;
+        font-size: .62rem;
+        letter-spacing: .08em
+      }
+
+      .modal-backdrop {
+        background: rgba(248, 244, 239, .96);
+        backdrop-filter: none
+      }
+
+      .card,
+      .card:focus,
+      .card:active {
+        -webkit-tap-highlight-color: transparent;
+        outline: none
+      }
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: nowrap
+    }
+
+    .main-nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 500
+    }
+
+    .site-header.visible {
+      background: rgba(248, 244, 239, .72);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(51, 43, 36, .05)
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 4rem 1rem
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 5.5rem;
+      margin: 0;
+      letter-spacing: .04em;
+      color: var(--text)
+    }
+
+    .hero-tag {
+      margin-top: 1rem;
+      color: var(--accent);
+      font-size: .95rem;
+      letter-spacing: .12em;
+      font-weight: 500;
+      text-transform: none
+    }
+
+    .pill-outline {
+      display: inline-block;
+      margin-top: 1.6rem;
+      padding: .7rem 1.2rem;
+      border-radius: 100px;
+      border: 1px solid rgba(51, 43, 36, .08);
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500
+    }
+
+    /* (hero background animation removed; page-level gradient handles ambient color)
    keyframes for section-level gradients are intentionally omitted */
 
-body{
-  background: #F8F4EF;
-  min-height: 100vh;
-}
+    body {
+      background: #F8F4EF;
+      min-height: 100vh;
+    }
 
-body::before{
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: #F8F4EF;
-  opacity: 1;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: #F8F4EF;
+      opacity: 1;
+    }
 
-/* Work grid */
-.work{padding:3rem 0}
-.custom-gifts-section{margin-top:4rem}
-.custom-gifts-section .grid{gap:2rem}
-.in-works-section{margin-top:4rem}
-.in-works-section .grid{gap:2rem}
-.work, .about, .commission, .site-footer, header, nav, section{background:transparent}
+    /* Work grid */
+    .work {
+      padding: 3rem 0
+    }
 
-main, nav{position:relative;z-index:1}
-.eyebrow{font-family:'DM Sans';font-weight:500;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin:0 0 1rem;font-size:.75rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;align-items:start;grid-auto-flow:dense}
-.card{border-radius:18px;overflow:hidden;background:var(--surface);position:relative;display:block;min-height:200px;box-shadow:0 10px 22px rgba(0,0,0,0.06);transform-origin:center;backface-visibility:hidden}
-.card::after{
-  content:attr(data-species);
-  position:absolute;
-  left:0;right:0;bottom:0;padding:.85rem 1rem;
-  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.16));
-  color:rgba(255,255,255,0.96);
-  font-size:.95rem;font-weight:600;letter-spacing:.04em;
-  text-shadow:0 1px 2px rgba(0,0,0,0.6);
-}
-.card:focus{outline:3px solid rgba(184,113,78,.12);outline-offset:6px}
-.card.tall{aspect-ratio:3/4}
-.card.medium{aspect-ratio:2/3}
-.card.landscape{aspect-ratio:4/3}
-.card.square{aspect-ratio:1/1}
-.card{transition:transform .28s cubic-bezier(.2,.9,.2,1),box-shadow .28s cubic-bezier(.2,.9,.2,1);will-change:transform}
-.card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 34px rgba(0,0,0,0.14);z-index:3}
+    .custom-gifts-section {
+      margin-top: 4rem
+    }
 
-/* Featured (larger) cards: span more grid space on wider screens */
-.card.featured{grid-column:span 2;grid-row:span 1;min-height:240px}
-.card.fossil-lamp{grid-column:2 / span 2}
-.card.split-right{grid-column:2 / span 2}
-@media (max-width:900px){.card.featured{grid-column:auto;grid-row:auto;min-height:240px}}
-@media (max-width:900px){.card.fossil-lamp{grid-column:auto}}
-@media (max-width:900px){.card.split-right{grid-column:auto}}
+    .custom-gifts-section .grid {
+      gap: 2rem
+    }
 
-/* Palette fills for placeholders */
-.card:nth-child(1){background:linear-gradient(180deg,var(--accent),#974f3a)}
-.card:nth-child(2){background:linear-gradient(180deg,var(--accent-2),#658a6b)}
-.card:nth-child(3){background:linear-gradient(180deg,var(--surface),#ded1c2)}
-.card:nth-child(4){background:linear-gradient(180deg,var(--blush),#bda79a)}
-.card:nth-child(5){background:linear-gradient(180deg,var(--accent),#9b5a3e)}
-.card:nth-child(6){background:linear-gradient(180deg,var(--accent-2),#5f866b)}
-.card:nth-child(7){background:linear-gradient(180deg,var(--surface),#e6dbce)}
-.card:nth-child(8){background:linear-gradient(180deg,var(--blush),#c8a99e)}
+    .in-works-section {
+      margin-top: 4rem
+    }
 
-/* About */
-.about{padding:3rem 0}
-.about p{font-size:1rem;line-height:1.75;text-align:center;margin:0 auto}
+    .in-works-section .grid {
+      gap: 2rem
+    }
 
-/* Commission */
-.commission{padding:3.5rem 0}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:2rem;margin:0 0 .5rem}
-.commission-intro{margin:0 0 1.25rem}
-.form{display:grid;gap:.75rem}
-.form label{font-size:.85rem}
-.form input,.form textarea{background:var(--surface);border:0;padding:.9rem 1rem;border-radius:18px;color:var(--text);font-size:1rem}
-.form input::placeholder,.form textarea::placeholder{color:rgba(51,43,36,.5)}
-.pill{border-radius:100px;padding:.75rem 1.2rem;background:var(--accent);color:white;border:0;font-weight:500}
-.pill:hover{filter:brightness(.95)}
+    .work,
+    .about,
+    .commission,
+    .site-footer,
+    header,
+    nav,
+    section {
+      background: transparent
+    }
 
-/* Footer */
-.site-footer{padding:6rem 0 8rem;color:rgba(51,43,36,.6);text-align:center}
-.footer-brand{display:flex;justify-content:center;align-items:center;opacity:.82;pointer-events:none;margin-top:3rem}
-.footer-brand .site-logo{height:240px;width:auto;color:var(--text);transform:translateY(10px)}
-@media (max-width:600px){
-  .footer-brand .site-logo{height:180px;transform:translateY(6px)}
-}
+    main,
+    nav {
+      position: relative;
+      z-index: 1
+    }
 
-/* Modal */
-.piece-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .42s cubic-bezier(.22,1,.36,1)}
-.piece-modal.active{opacity:1;pointer-events:auto}
-.piece-modal.closing{opacity:0;pointer-events:none}
-.modal-backdrop{position:absolute;inset:0;background:rgba(248,244,239,.88);backdrop-filter:none;opacity:0;transition:opacity .42s cubic-bezier(.22,1,.36,1)}
-.piece-modal.active .modal-backdrop{opacity:1}
-.piece-modal.closing .modal-backdrop{opacity:0}
-.modal-content{position:relative;z-index:101;background:rgba(255,255,255,.96);border-radius:24px;max-width:1200px;width:min(90vw,1200px);max-height:calc(100vh - 2rem);display:grid;grid-template-columns:1.6fr 1fr;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);transform:scale(.96) translateY(18px);opacity:0;transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s cubic-bezier(.22,1,.36,1);will-change:transform,opacity;-webkit-overflow-scrolling:touch}
-.piece-modal.active .modal-content{transform:scale(1) translateY(0);opacity:1}
-.piece-modal.closing .modal-content{transform:scale(.96) translateY(18px);opacity:0}
-.modal-close{position:absolute;top:1rem;right:1rem;z-index:102;background:rgba(255,255,255,.9);border:0;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:background .2s ease,transform .2s ease;flex-shrink:0}
-.modal-close:hover{background:white;transform:scale(1.04)}
-.modal-image-container{background:var(--surface);display:flex;align-items:center;justify-content:center;padding:2rem;border-radius:0;overflow:hidden}
-.modal-image{width:100%;aspect-ratio:1;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
-.modal-slider{display:flex;align-items:center;gap:.5rem;width:100%;max-width:900px}
-.slider-prev,.slider-next{background:rgba(255,255,255,.95);border:0;border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;color:var(--text);box-shadow:0 6px 18px rgba(0,0,0,0.12)}
-.slider-track{flex:1;overflow:hidden;border-radius:14px}
-.slider-track-inner{display:flex;transition:transform .35s ease}
-.slider-track-inner .slide{flex:0 0 100%;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px}
-.slider-track img{max-height:calc(80vh - 120px);max-width:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:12px;overflow:hidden}
-.modal-info{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;letter-spacing:.04em;margin:0 0 1rem;color:var(--text)}
-.modal-description{font-size:1rem;line-height:1.6;color:var(--text);margin:0;opacity:.85}
- .modal-actions{margin-top:1.25rem;display:flex;gap:.75rem}
- .modal-actions .pill{padding:.6rem 1rem}
-@keyframes modalSlideIn{from{transform:scale(.96) translateY(18px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
-@media (max-width:900px){
-  .modal-content{grid-template-columns:1fr;max-height:calc(100vh - 1rem)}
-  .modal-image-container{padding:1rem}
-  .modal-info{padding:1.25rem}
-  .modal-slider{max-width:100%}
-  .slider-prev,.slider-next{width:44px;height:44px;font-size:20px}
-  .slider-track img{height:48vh}
-}
-@media (max-width:600px){
-  .piece-modal{padding:.5rem}
-  .modal-content{max-width:90vw;border-radius:16px;max-height:calc(100vh - 1rem)}
-  .modal-image-container{padding:1rem;min-height:300px;border-radius:12px;overflow:hidden}
-  .modal-image{aspect-ratio:1;border-radius:12px}
-  .slider-track,.slider-track-inner,.slider-track-inner .slide,.slider-track img{border-radius:12px}
-  .modal-info{padding:1.5rem}
-  .modal-title{font-size:1.5rem}
-  .modal-description{font-size:.95rem}
-  .modal-close{width:36px;height:36px;top:.75rem;right:.75rem}
-}
+    .eyebrow {
+      font-family: 'DM Sans';
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin: 0 0 1rem;
+      font-size: .75rem
+    }
 
-/* Responsive */
-@media (max-width:900px){
-  .hero-title{font-size:4.25rem}
-  .container{padding:1.5rem}
-}
-@media (max-width:600px){
-  .hero-title{font-size:3rem}
-  .site-header .brand{font-size:1rem}
-  .hero-inner{padding:3rem 1rem}
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+      grid-auto-flow: dense
+    }
+
+    .card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--surface);
+      position: relative;
+      display: block;
+      min-height: 200px;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+      transform-origin: center;
+      backface-visibility: hidden
+    }
+
+    .card::after {
+      content: attr(data-species);
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: .85rem 1rem;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.16));
+      color: rgba(255, 255, 255, 0.96);
+      font-size: .95rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    .card:focus {
+      outline: 3px solid rgba(184, 113, 78, .12);
+      outline-offset: 6px
+    }
+
+    .card.tall {
+      aspect-ratio: 3/4
+    }
+
+    .card.medium {
+      aspect-ratio: 2/3
+    }
+
+    .card.landscape {
+      aspect-ratio: 4/3
+    }
+
+    .card.square {
+      aspect-ratio: 1/1
+    }
+
+    .card {
+      transition: transform .28s cubic-bezier(.2, .9, .2, 1), box-shadow .28s cubic-bezier(.2, .9, .2, 1);
+      will-change: transform
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.14);
+      z-index: 3
+    }
+
+    /* Featured (larger) cards: span more grid space on wider screens */
+    .card.featured {
+      grid-column: span 2;
+      grid-row: span 1;
+      min-height: 240px
+    }
+
+    .card.fossil-lamp {
+      grid-column: 2 / span 2
+    }
+
+    .card.split-right {
+      grid-column: 2 / span 2
+    }
+
+    @media (max-width:900px) {
+      .card.featured {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 240px
+      }
+    }
+
+    @media (max-width:900px) {
+      .card.fossil-lamp {
+        grid-column: auto
+      }
+    }
+
+    @media (max-width:900px) {
+      .card.split-right {
+        grid-column: auto
+      }
+    }
+
+    /* Palette fills for placeholders */
+    .card:nth-child(1) {
+      background: linear-gradient(180deg, var(--accent), #974f3a)
+    }
+
+    .card:nth-child(2) {
+      background: linear-gradient(180deg, var(--accent-2), #658a6b)
+    }
+
+    .card:nth-child(3) {
+      background: linear-gradient(180deg, var(--surface), #ded1c2)
+    }
+
+    .card:nth-child(4) {
+      background: linear-gradient(180deg, var(--blush), #bda79a)
+    }
+
+    .card:nth-child(5) {
+      background: linear-gradient(180deg, var(--accent), #9b5a3e)
+    }
+
+    .card:nth-child(6) {
+      background: linear-gradient(180deg, var(--accent-2), #5f866b)
+    }
+
+    .card:nth-child(7) {
+      background: linear-gradient(180deg, var(--surface), #e6dbce)
+    }
+
+    .card:nth-child(8) {
+      background: linear-gradient(180deg, var(--blush), #c8a99e)
+    }
+
+    /* About */
+    .about {
+      padding: 3rem 0
+    }
+
+    .about p {
+      font-size: 1rem;
+      line-height: 1.75;
+      text-align: center;
+      margin: 0 auto
+    }
+
+    /* Commission */
+    .commission {
+      padding: 3.5rem 0
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      margin: 0 0 .5rem
+    }
+
+    .commission-intro {
+      margin: 0 0 1.25rem
+    }
+
+    .form {
+      display: grid;
+      gap: .75rem
+    }
+
+    .form label {
+      font-size: .85rem
+    }
+
+    .form input,
+    .form textarea {
+      background: var(--surface);
+      border: 0;
+      padding: .9rem 1rem;
+      border-radius: 18px;
+      color: var(--text);
+      font-size: 1rem
+    }
+
+    .form input::placeholder,
+    .form textarea::placeholder {
+      color: rgba(51, 43, 36, .5)
+    }
+
+    .pill {
+      border-radius: 100px;
+      padding: .75rem 1.2rem;
+      background: var(--accent);
+      color: white;
+      border: 0;
+      font-weight: 500
+    }
+
+    .pill:hover {
+      filter: brightness(.95)
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 6rem 0 8rem;
+      color: rgba(51, 43, 36, .6);
+      text-align: center
+    }
+
+    .footer-brand {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: .82;
+      pointer-events: none;
+      margin-top: 3rem
+    }
+
+    .footer-brand .site-logo {
+      height: 240px;
+      width: auto;
+      color: var(--text);
+      transform: translateY(10px)
+    }
+
+    @media (max-width:600px) {
+      .footer-brand .site-logo {
+        height: 180px;
+        transform: translateY(6px)
+      }
+    }
+
+    /* Modal */
+    .piece-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .42s cubic-bezier(.22, 1, .36, 1)
+    }
+
+    .piece-modal.active {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .piece-modal.closing {
+      opacity: 0;
+      pointer-events: none
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(248, 244, 239, .88);
+      backdrop-filter: none;
+      opacity: 0;
+      transition: opacity .42s cubic-bezier(.22, 1, .36, 1)
+    }
+
+    .piece-modal.active .modal-backdrop {
+      opacity: 1
+    }
+
+    .piece-modal.closing .modal-backdrop {
+      opacity: 0
+    }
+
+    .modal-content {
+      position: relative;
+      z-index: 101;
+      background: rgba(255, 255, 255, .96);
+      border-radius: 24px;
+      max-width: 1200px;
+      width: min(90vw, 1200px);
+      max-height: calc(100vh - 2rem);
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      overflow: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
+      transform: scale(.96) translateY(18px);
+      opacity: 0;
+      transition: transform .42s cubic-bezier(.22, 1, .36, 1), opacity .42s cubic-bezier(.22, 1, .36, 1);
+      will-change: transform, opacity;
+      -webkit-overflow-scrolling: touch
+    }
+
+    .piece-modal.active .modal-content {
+      transform: scale(1) translateY(0);
+      opacity: 1
+    }
+
+    .piece-modal.closing .modal-content {
+      transform: scale(.96) translateY(18px);
+      opacity: 0
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 102;
+      background: rgba(255, 255, 255, .9);
+      border: 0;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: background .2s ease, transform .2s ease;
+      flex-shrink: 0
+    }
+
+    .modal-close:hover {
+      background: white;
+      transform: scale(1.04)
+    }
+
+    .modal-image-container {
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      border-radius: 0;
+      overflow: hidden
+    }
+
+    .modal-image {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2))
+    }
+
+    .modal-slider {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      width: 100%;
+      max-width: 900px
+    }
+
+    .slider-prev,
+    .slider-next {
+      background: rgba(255, 255, 255, .95);
+      border: 0;
+      border-radius: 12px;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      color: var(--text);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12)
+    }
+
+    .slider-track {
+      flex: 1;
+      overflow: hidden;
+      border-radius: 14px
+    }
+
+    .slider-track-inner {
+      display: flex;
+      transition: transform .35s ease
+    }
+
+    .slider-track-inner .slide {
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 12px
+    }
+
+    .slider-track img {
+      max-height: calc(80vh - 120px);
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 12px;
+      overflow: hidden
+    }
+
+    .modal-info {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: .04em;
+      margin: 0 0 1rem;
+      color: var(--text)
+    }
+
+    .modal-notice {
+      margin: .75rem 0 0;
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.6;
+      opacity: .85
+    }
+
+    .modal-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin: 0;
+      opacity: .85
+    }
+
+    .modal-actions {
+      margin-top: 1.25rem;
+      display: flex;
+      gap: .75rem
+    }
+
+    .modal-actions .pill {
+      padding: .6rem 1rem
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        transform: scale(.96) translateY(18px);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1
+      }
+    }
+
+    @media (max-width:900px) {
+      .modal-content {
+        grid-template-columns: 1fr;
+        max-height: calc(100vh - 1rem)
+      }
+
+      .modal-image-container {
+        padding: 1rem
+      }
+
+      .modal-info {
+        padding: 1.25rem
+      }
+
+      .modal-slider {
+        max-width: 100%
+      }
+
+      .slider-prev,
+      .slider-next {
+        width: 44px;
+        height: 44px;
+        font-size: 20px
+      }
+
+      .slider-track img {
+        height: 48vh
+      }
+    }
+
+    @media (max-width:600px) {
+      .piece-modal {
+        padding: .5rem
+      }
+
+      .modal-content {
+        max-width: 90vw;
+        border-radius: 16px;
+        max-height: calc(100vh - 1rem)
+      }
+
+      .modal-image-container {
+        padding: 1rem;
+        min-height: 300px;
+        border-radius: 12px;
+        overflow: hidden
+      }
+
+      .modal-image {
+        aspect-ratio: 1;
+        border-radius: 12px
+      }
+
+      .slider-track,
+      .slider-track-inner,
+      .slider-track-inner .slide,
+      .slider-track img {
+        border-radius: 12px
+      }
+
+      .modal-info {
+        padding: 1.5rem
+      }
+
+      .modal-title {
+        font-size: 1.5rem
+      }
+
+      .modal-description {
+        font-size: .95rem
+      }
+
+      .modal-close {
+        width: 36px;
+        height: 36px;
+        top: .75rem;
+        right: .75rem
+      }
+    }
+
+    /* Responsive */
+    @media (max-width:900px) {
+      .hero-title {
+        font-size: 4.25rem
+      }
+
+      .container {
+        padding: 1.5rem
+      }
+    }
+
+    @media (max-width:600px) {
+      .hero-title {
+        font-size: 3rem
+      }
+
+      .site-header .brand {
+        font-size: 1rem
+      }
+
+      .hero-inner {
+        padding: 3rem 1rem
+      }
+    }
   </style>
 </head>
+
 <body>
   <header class="site-header" id="site-header" aria-hidden="true">
     <div class="header-inner">
       <div class="brand">
-        <svg class="site-logo" viewBox="0 0 2550 3300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="img">
+        <svg class="site-logo" viewBox="0 0 2550 3300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+          focusable="false" role="img">
           <g>
-            <path d="M1548.533,1427.681c-14.442,-0.272 -101.142,-1.907 -180.561,0.416c-9.416,0.275 -7.928,9.574 -8.154,23.306c-4.874,296.023 25.243,476.471 -70.134,574.308c-90.104,92.428 -312.274,88.774 -426.689,33.079c-129.269,-62.926 -128.179,-230.111 -125.563,-240.813c1.893,-7.748 3.507,-11.044 97.502,-20.798c21.142,-2.194 15.665,8.27 18.161,29.34c10.939,92.33 53.518,120.237 62.969,126.431c35.829,23.483 114.449,33.084 129.859,32.795c156.212,-2.936 168.619,-57.861 179.505,-98.546c13.935,-52.082 8.052,-453.374 5.496,-457.277c-4.094,-6.252 -345.424,-0.217 -351.785,-3.357c-8.366,-4.129 -4.12,-120.325 -2.429,-122.171c7.498,-8.185 341.441,0.847 352.925,-5.133c9.413,-4.901 -0.193,-221.603 5.602,-227.951c5.717,-6.263 113.472,-2.529 116.072,-2.348c9.166,0.637 8.119,16.876 8.438,46.383c1.773,163.683 -6.033,184.124 8.346,185.609c68.324,7.056 284.871,-25.86 390.491,57.312c115.842,91.223 105.78,373.464 22.207,478.308c-74.05,92.896 -218.918,93.776 -222.573,83.631c-2.752,-7.637 -14.377,-97.059 -14.546,-102.191c-0.87,-26.372 198.914,29.682 187.036,-227.659c-6.88,-149.051 -68.082,-158.533 -182.172,-162.674Z" style="fill:currentColor;fill-opacity:0.99;"/>
-            <path d="M265.511,1735.475c27.985,-3.263 35.37,-2.553 63.687,0.076c137.609,181.437 275.218,362.873 412.827,544.31c140.454,184.407 542.142,715.109 546.013,717.601c7.629,4.913 7.403,-2.273 155.655,-195.778c64.197,-83.792 787.457,-1041.325 810.43,-1066.415c24.185,-2.273 33.146,-3.026 63.7,0.446c-22.133,24.704 -642.637,846.55 -953.948,1252.595c-55.188,71.982 -65.173,94.361 -89.345,72.876c-7.663,-6.811 -7.471,-6.991 -243.721,-317.411c-61.329,-80.584 -728.712,-957.491 -765.298,-1008.299Z" style="fill:currentColor;fill-opacity:0.99;"/>
-            <path d="M265.488,1564.18c53.302,-69.134 52.311,-69.795 659.795,-869.134c345.303,-454.356 343.066,-458.043 356.691,-462.82c25.895,-9.079 45.335,33.418 94.077,94.602c25.509,32.021 402.656,530.352 437.599,576.523c40.125,53.018 475.392,628.144 504.22,660.707c-34.839,2.812 -31.49,1.653 -66.231,-0.106c0.259,-1.419 -139.387,-182.253 -227.135,-299.407c-96.537,-128.888 -416.39,-549.425 -452.68,-597.139c-251.82,-331.089 -277.052,-366.559 -281.586,-366.183c-7.369,0.611 -820.608,1077.669 -890.048,1168.637c-66.334,86.9 -66.656,87.086 -68.077,94.276c-52.748,3.605 -54.106,1.003 -66.624,0.043Z" style="fill:currentColor;fill-opacity:0.99;"/>
+            <path
+              d="M1548.533,1427.681c-14.442,-0.272 -101.142,-1.907 -180.561,0.416c-9.416,0.275 -7.928,9.574 -8.154,23.306c-4.874,296.023 25.243,476.471 -70.134,574.308c-90.104,92.428 -312.274,88.774 -426.689,33.079c-129.269,-62.926 -128.179,-230.111 -125.563,-240.813c1.893,-7.748 3.507,-11.044 97.502,-20.798c21.142,-2.194 15.665,8.27 18.161,29.34c10.939,92.33 53.518,120.237 62.969,126.431c35.829,23.483 114.449,33.084 129.859,32.795c156.212,-2.936 168.619,-57.861 179.505,-98.546c13.935,-52.082 8.052,-453.374 5.496,-457.277c-4.094,-6.252 -345.424,-0.217 -351.785,-3.357c-8.366,-4.129 -4.12,-120.325 -2.429,-122.171c7.498,-8.185 341.441,0.847 352.925,-5.133c9.413,-4.901 -0.193,-221.603 5.602,-227.951c5.717,-6.263 113.472,-2.529 116.072,-2.348c9.166,0.637 8.119,16.876 8.438,46.383c1.773,163.683 -6.033,184.124 8.346,185.609c68.324,7.056 284.871,-25.86 390.491,57.312c115.842,91.223 105.78,373.464 22.207,478.308c-74.05,92.896 -218.918,93.776 -222.573,83.631c-2.752,-7.637 -14.377,-97.059 -14.546,-102.191c-0.87,-26.372 198.914,29.682 187.036,-227.659c-6.88,-149.051 -68.082,-158.533 -182.172,-162.674Z"
+              style="fill:currentColor;fill-opacity:0.99;" />
+            <path
+              d="M265.511,1735.475c27.985,-3.263 35.37,-2.553 63.687,0.076c137.609,181.437 275.218,362.873 412.827,544.31c140.454,184.407 542.142,715.109 546.013,717.601c7.629,4.913 7.403,-2.273 155.655,-195.778c64.197,-83.792 787.457,-1041.325 810.43,-1066.415c24.185,-2.273 33.146,-3.026 63.7,0.446c-22.133,24.704 -642.637,846.55 -953.948,1252.595c-55.188,71.982 -65.173,94.361 -89.345,72.876c-7.663,-6.811 -7.471,-6.991 -243.721,-317.411c-61.329,-80.584 -728.712,-957.491 -765.298,-1008.299Z"
+              style="fill:currentColor;fill-opacity:0.99;" />
+            <path
+              d="M265.488,1564.18c53.302,-69.134 52.311,-69.795 659.795,-869.134c345.303,-454.356 343.066,-458.043 356.691,-462.82c25.895,-9.079 45.335,33.418 94.077,94.602c25.509,32.021 402.656,530.352 437.599,576.523c40.125,53.018 475.392,628.144 504.22,660.707c-34.839,2.812 -31.49,1.653 -66.231,-0.106c0.259,-1.419 -139.387,-182.253 -227.135,-299.407c-96.537,-128.888 -416.39,-549.425 -452.68,-597.139c-251.82,-331.089 -277.052,-366.559 -281.586,-366.183c-7.369,0.611 -820.608,1077.669 -890.048,1168.637c-66.334,86.9 -66.656,87.086 -68.077,94.276c-52.748,3.605 -54.106,1.003 -66.624,0.043Z"
+              style="fill:currentColor;fill-opacity:0.99;" />
           </g>
         </svg>
         <div class="brand-text">Crossing J Workshop</div>
@@ -239,9 +883,25 @@ main, nav{position:relative;z-index:1}
       <div class="container">
         <div class="eyebrow">Recently Completed</div>
         <div class="grid">
-          <figure class="card landscape" data-species="Butterfly - Ink" data-description="A detailed hand-drawn ink illustration of a butterfly, completed entirely by hand using layered cross-hatching to create delicate shading and texture." data-images="Butterfly%20-%20Ink/B%20hero.png,Butterfly%20-%20Ink/B%20support.JPEG" tabindex="0" style="background-image: url('Butterfly%20-%20Ink/B%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card landscape featured" data-species="Oak Bowl - Spanish Red Oak" data-description="This oak bowl was made for a commission and is an important piece in our collection. Spanish oak burl was cast in a moss green epoxy, then carefully turned, polished, and finished with oil and wax. A beautiful vintage-styled bowl with a simple and elegant shape." data-images="Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20hero.png,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support.jpeg,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support%202.jpeg,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support%203.jpeg,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support%204.jpeg" tabindex="0" style="background-image: url('Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="OU Watch Holder - Mesquite" data-description="A piece of mesquite branch rescued from a jobsite with a close friend and turned into an awesome watch holder. This project is a thank-you to a friend from the University of Oklahoma for letting us help his company." data-images="OU%20Watch%20Holder%20-%20Mesquite/OU%20hero.jpeg" tabindex="0" style="background-image: url('OU%20Watch%20Holder%20-%20Mesquite/OU%20hero.jpeg'); background-size:cover; background-position:center;"></figure>
+          <figure class="card landscape" data-species="Butterfly - Ink"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A detailed hand-drawn ink illustration of a butterfly, completed entirely by hand using layered cross-hatching to create delicate shading and texture."
+            data-images="Butterfly%20-%20Ink/B%20hero.png,Butterfly%20-%20Ink/B%20support.JPEG" tabindex="0"
+            style="background-image: url('Butterfly%20-%20Ink/B%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card landscape featured" data-species="Oak Bowl - Spanish Red Oak"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="This oak bowl was made for a commission and is an important piece in our collection. Spanish oak burl was cast in a moss green epoxy, then carefully turned, polished, and finished with oil and wax. A beautiful vintage-styled bowl with a simple and elegant shape."
+            data-images="Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20hero.png,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support.jpeg,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support%202.jpeg,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support%203.jpeg,Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20support%204.jpeg"
+            tabindex="0"
+            style="background-image: url('Oak%20Bowl%20-%20Spanish%20Red%20Oak/OB%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="OU Watch Holder - Mesquite"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A piece of mesquite branch rescued from a jobsite with a close friend and turned into an awesome watch holder. This project is a thank-you to a friend from the University of Oklahoma for letting us help his company."
+            data-images="OU%20Watch%20Holder%20-%20Mesquite/OU%20hero.jpeg" tabindex="0"
+            style="background-image: url('OU%20Watch%20Holder%20-%20Mesquite/OU%20hero.jpeg'); background-size:cover; background-position:center;">
+          </figure>
         </div>
       </div>
     </section>
@@ -250,50 +910,245 @@ main, nav{position:relative;z-index:1}
       <div class="container">
         <div class="eyebrow">Work</div>
         <div class="grid">
-          <figure class="card tall" data-species="Ash Tray - Ashe Juniper" data-description="A gift made to be used as an ashtray. Originally a solid piece of ashe juniper, it split during the turning process and was cast in clear epoxy to highlight the split and add strength. Mini rocks were cast separately to create a removable, cleanable rock bottom for the bowl." data-images="Ash%20Tray%20-%20Ashe%20Juniper/AT%20hero%20.jpeg,Ash%20Tray%20-%20Ashe%20Juniper/At%20support%202.jpeg,Ash%20Tray%20-%20Ashe%20Juniper/AT%20support%203.jpeg,Ash%20Tray%20-%20Ashe%20Juniper/AT%20Support%204.jpeg" tabindex="0" aria-hidden="false" style="background-image: url('Ash%20Tray%20-%20Ashe%20Juniper/AT%20hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured" data-species="Rail Lamp - Reuse" data-description="A new life for a piece of wood from a guard rail damaged in a car accident. The wood was paired with a recycled lamp stand, a warm LED bulb, and a repurposed lamp shade painted to echo its charred top. Finished and protected with UV epoxy, this important project turns damage into a distinctive lamp." data-images="Rail%20Lamp%20-%20Reuse/RL%20hero%20.png,Rail%20Lamp%20-%20Reuse/RL%20support%20.png,Rail%20Lamp%20-%20Reuse/RL%20support%202.png" tabindex="0" style="background-image: url('Rail%20Lamp%20-%20Reuse/RL%20hero%20.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured" data-species="Lamp - Texas Red Oak" data-description="Candelabra‑base lamp with a warm, low‑lumen bulb, reclaimed shade, and stained in‑house with Texas persimmon — hand‑polished." data-images="Lamp%20-%20Texas%20Red%20Oak/LTRO%20hero.jpeg,Lamp%20-%20Texas%20Red%20Oak/LTRO%20support.jpeg,Lamp%20-%20Texas%20Red%20Oak/LTRO%20support2.jpeg" tabindex="0" style="background-image: url('Lamp%20-%20Texas%20Red%20Oak/LTRO%20hero.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Bulb Vase - Crepe Myrtle" data-description="A medium-sized vase made from crepe myrtle trimmings cast in a gradient from blue to green. The piece exposes the wood's varied grains and is finished with UV epoxy for a brilliant shine." data-images="Bulb%20Vase%20-%20Crepe%20Myrtle/BV%20Hero%20.jpeg,Bulb%20Vase%20-%20Crepe%20Myrtle/BV%20Support%20.jpeg" tabindex="0" style="background-image: url('Bulb%20Vase%20-%20Crepe%20Myrtle/BV%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="B&amp;W - Crepe Myrtle" data-description="Crepe myrtle trimmings cast in a striking light-to-dark gradient, made as a family gift and finished with UV epoxy." data-images="B%26W%20-%20Crepe%20Myrtle/BW%20hero.jpeg,B%26W%20-%20Crepe%20Myrtle/BW%20support.jpeg" tabindex="0" style="background-image: url('B%26W%20-%20Crepe%20Myrtle/BW%20hero.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Cedar Bulb - Ashe Juniper" data-description="A customer favorite, this vase is often enjoyed as a shelf piece because of its distinctive shape. Made from ashe juniper, it features subtle holes and pockets filled with colorful accents that let the wood remain the focus. Finished with polishing paste." data-images="Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20Hero%20.jpeg,Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20support.jpeg,Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20support%202.jpeg" tabindex="0" style="background-image: url('Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card medium" data-species="2 Roses - Ink" data-description="A handmade 2 x 3 ink drawing on felt-tip pen, created as a personal gift in a grayscale style reminiscent of a Georgia O'Keeffe painting. Every shape is made using only cross-hatching, building the roses through layered lines and tonal texture." data-images="2%20Roses%20-%20Ink/R%20hero.png,2%20Roses%20-%20Ink/R%20support.JPEG" tabindex="0" style="background-image: url('2%20Roses%20-%20Ink/R%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Purple Vase - Cedar" data-description="A commissioned gift made from cedar branches cast in deep purple mica epoxy with soft pearl-like reflections. One of our more distinctive pieces, it is finished with UV epoxy." data-images="Purple%20Vase%20-%20Cedar/PV%20hero.png,Purple%20Vase%20-%20Cedar/PV%20support.JPG" tabindex="0" style="background-image: url('Purple%20Vase%20-%20Cedar/PV%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Wood &amp; Cloud - Redwood" data-description="A beautiful small vase made from redwood branches set in a subtle gradient from white to light blue. The colorful speckled effect and swirling epoxy evoke clouds in the sky, while mineral oil preserves the natural look of the wood." data-images="Wood%20%26%20Cloud%20-%20Redwood/WC%20Hero%20.jpeg,Wood%20%26%20Cloud%20-%20Redwood/WC%20support.jpeg,Wood%20%26%20Cloud%20-%20Redwood/WC%20support%202.jpeg,Wood%20%26%20Cloud%20-%20Redwood/WC%20support%203%20.jpeg" tabindex="0" style="background-image: url('Wood%20%26%20Cloud%20-%20Redwood/WC%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card square" data-species="Red Dish - Redwood" data-description="Red Dish — broken pieces from a redwood branch were cast together to make this simple kitchen dish or bowl; polished and protected with paste and wax." data-images="Red%20Dish%20-%20Redwood/RD%20hero%20.png,Red%20Dish%20-%20Redwood/RD%20support%20.jpg" tabindex="0" style="background-image: url('Red%20Dish%20-%20Redwood/RD%20hero%20.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured" data-species="Honoring Kerrville" data-description="Honoring Kerrville — salvaged from the flood site and remade as a charity donation; ashe juniper cast in epoxy and finished with UV epoxy." data-images="Honoring%20Kerrville%20-%20Ashe%20Juniper/BV%20Hero.png,Honoring%20Kerrville%20-%20Ashe%20Juniper/BV%20support.JPEG" tabindex="0" style="background-image: url('Honoring%20Kerrville%20-%20Ashe%20Juniper/BV%20Hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card landscape" data-species="Black Vase - Epoxy Resin" data-description="Created from an accident: a mixed cup of epoxy was left out too long and hardened before any wood could be inserted. The accident became a new project, turned into a desk pencil holder from epoxy with black paste and reflective pearl-white mica powder." data-images="Black%20Vase%20-%20Epoxy%20Resin/BV%20Hero%20.jpeg,Black%20Vase%20-%20Epoxy%20Resin/BV%20Support%20.jpeg,Black%20Vase%20-%20Epoxy%20Resin/BV%20support%202%20.jpeg" tabindex="0" style="background-image: url('Black%20Vase%20-%20Epoxy%20Resin/BV%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured" data-species="The Pawn - Decayed Oak" data-description="Our first completed project and an important piece in the collection. A rotted oak section was carefully picked clean of decayed wood, then painted with cobalt blue mica and cast in dark aqua-blue epoxy. Set over an LED puck light at the base, it creates an aquarium-like scene within the piece. Finished with UV epoxy for a beautiful shine." data-images="./The%20Pawn%20-%20Decayed%20Oak/TP%20hero.png,./The%20Pawn%20-%20Decayed%20Oak/TP%20support.png,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%202.jpeg,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%203.jpeg,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%204.jpeg,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%205.jpeg" tabindex="0" style="background-image: url('./The%20Pawn%20-%20Decayed%20Oak/TP%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card square" data-species="Candle Holder - Ashe Juniper" data-description="Small, intimate candle holder turned from ashe juniper and finished with protective paste and wax — a quick, intimate counter to our larger projects." data-images="Candle%20Holder%20-%20Ashe%20Juniper/CH%20Hero.png,Candle%20Holder%20-%20Ashe%20Juniper/CH%20support.jpg" tabindex="0" style="background-image: url('Candle%20Holder%20-%20Ashe%20Juniper/CH%20Hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card landscape" data-species="Nut Dish - Oak Trimmings" data-description="Nut Dish — made from oak trimmings collected around the area as a commissioned dish for a relative; finished with UV epoxy and poured with a cobalt blue epoxy." data-images="Nut%20Dish%20-%20Oak%20Trimmings/ND%20hero.png,Nut%20Dish%20-%20Oak%20Trimmings/ND%20support.jpg" tabindex="0" style="background-image: url('Nut%20Dish%20-%20Oak%20Trimmings/ND%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card landscape" data-species="Sugar Bowl - Ashe Juniper" data-description="Local ashe juniper bowl with subtle blue epoxy pockets; finished with protective paste and wax." data-images="Sugar%20Bowl%20-%20Ashe%20Juniper/SB%20hero.png,Sugar%20Bowl%20-%20Ashe%20Juniper/SB%20support.jpg" tabindex="0" style="background-image: url('Sugar%20Bowl%20-%20Ashe%20Juniper/SB%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured" data-species="Frozen - Live Oak" data-description="Candelabra‑base commission from a freeze‑snapped live oak branch — charred tips and tinted epoxy preserve the dramatic form; hand‑finished." data-images="Frozen%20-%20Live%20Oak/F%20hero.png,Frozen%20-%20Live%20Oak/F%20support%202.png,Frozen%20-%20Live%20Oak/F%20support.jpg" tabindex="0" style="background-image: url('Frozen%20-%20Live%20Oak/F%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Skinny Blue - Cedar" data-description="Skinny Blue — a turned cedar vase finished with UV epoxy; a practice in lathing smaller pieces." data-images="Skinny%20Blue%20-%20Cedar/SB%20hero%20.png,Skinny%20Blue%20-%20Cedar/SB%20support%20.jpg" tabindex="0" style="background-image: url('Skinny%20Blue%20-%20Cedar/SB%20hero%20.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="End Table - Recycle" data-description="A dark-stained end table that was rescued from the discard pile and given a new life. The solid paint was sanded away, then a white base was added and sanded again to create a rustic finish. Divots in the top were filled with coffee-colored epoxy, and polyurethane protects the restored wood." data-images="End%20Table%20-%20Recycle/ET%20Hero.png,End%20Table%20-%20Recycle/ET%20support.jpeg,End%20Table%20-%20Recycle/ET%20support%202.jpeg,End%20Table%20-%20Recycle/ET%20support%203.jpeg,End%20Table%20-%20Recycle/ET%20support%204.png" tabindex="0" style="background-image: url('End%20Table%20-%20Recycle/ET%20Hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Flower Vase - Live Oak" data-description="A small live oak flower vase made as a commissioned gift for a friend. Finished with glossy UV epoxy, its natural holes are filled with deep-pour epoxy tinted with black paste, creating a dramatic contrast between the wood and its voids." data-images="Flower%20Vase%20-%20Live%20Oak/FV%20hero%20.png,Flower%20Vase%20-%20Live%20Oak/FV%20support%20.jpg" tabindex="0" style="background-image: url('Flower%20Vase%20-%20Live%20Oak/FV%20hero%20.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Brown Vase - Live Oak" data-description="A recently sold live oak flower vase with brown epoxy pockets carefully blended into the wood's natural grain and color. Polished with finishing wax." data-images="Brown%20Vase%20-%20Live%20Oak/BV%20hero.jpeg,Brown%20Vase%20-%20Live%20Oak/BV%20support.jpeg" tabindex="0" style="background-image: url('Brown%20Vase%20-%20Live%20Oak/BV%20hero.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured fossil-lamp" data-species="Fossil Lamp - Oak" data-description="A personal favorite and our highest-selling product, made from a section of rotting firewood with the back hollowed out to reveal its natural character. It holds a low-lumen candelabra-base bulb and is cast in amber-colored epoxy, with its holes filled using UV epoxy. Mounted to a recycled lamp stand and finished with protective polishing paste." data-images="Fossil%20Lamp%20-%20Oak/FL%20Hero.png,Fossil%20Lamp%20-%20Oak/FL%20support.png,Fossil%20Lamp%20-%20Oak/FL%20support%202.jpeg,Fossil%20Lamp%20-%20Oak/FL%20support%203.jpeg,Fossil%20Lamp%20-%20Oak/FL%20support%204.jpeg" tabindex="0" style="background-image: url('Fossil%20Lamp%20-%20Oak/FL%20Hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Mini Blue - Ashe Juniper" data-description="A quick, playful project made from leftover epoxy from another piece, with an ashe juniper branch placed into the refuse container to create a mini vase or bowl. This piece uses bright blue mica and is finished with mineral oil to preserve the branch's natural look." data-images="Mini%20Blue%20-%20Ashe%20Juniper/MB%20Hero%20.jpeg,Mini%20Blue%20-%20Ashe%20Juniper/MB%20Support%20.jpeg" tabindex="0" style="background-image: url('Mini%20Blue%20-%20Ashe%20Juniper/MB%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card landscape" data-species="Mini Flame - Texas Red Oak" data-description="A small, intimate piece from the mini series, hollowed into a teacup candle holder. Polished and buffed to help protect the wood from heat, it was made without pouring any epoxy, letting the natural wood stand on its own." data-images="Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20Hero%20.jpeg,Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20support%20.jpeg,Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20support%202%20.jpeg" tabindex="0" style="background-image: url('Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Mini Red - Ashe Juniper" data-description="A cute little vase from the mini series, made from an ashe juniper branch cast in dazzling red epoxy. Recently sold and a customer favorite, it is finished with mineral oil to preserve the natural character of the wood." data-images="Mini%20Red%20-%20Ashe%20Juniper/MR%20hero%20.jpeg,Mini%20Red%20-%20Ashe%20Juniper/MR%20support%20.jpeg,Mini%20Red%20-%20Ashe%20Juniper/MR%20support%202.jpeg,Mini%20Red%20-%20Ashe%20Juniper/MR%20support%203.jpeg" tabindex="0" style="background-image: url('Mini%20Red%20-%20Ashe%20Juniper/MR%20hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card landscape featured" data-species="No. 1&amp;2 - Recycle" data-description="A pair of chairs rescued from the roadside after being neglected and discarded. Rotted and chipped paint was sanded away, new cushions were made with a stylish textile, and the painted numbers on the backs were preserved under polyurethane. Cracks were repaired with wood glue and sawdust, and new nails added support. Among our most inquired-after pieces, they are still available." data-images="No.%201%262%20-%20Recycle/1%262%20Hero.png,No.%201%262%20-%20Recycle/1%262%20Support%20.jpeg,No.%201%262%20-%20Recycle/1%262%20Support%202%20.jpeg,No.%201%262%20-%20Recycle/1%262%20support%203.jpeg,No.%201%262%20-%20Recycle/1%262%20support%204.jpeg" tabindex="0" style="background-image: url('No.%201%262%20-%20Recycle/1%262%20Hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured" data-species="Big Blue - Ashe Juniper" data-description="Recently sold at a vendor day, this large piece of ashe juniper was turned into a large hollowed vase for flowers or whatever you can imagine. Its shape exposes the beautiful topography of the wood, complemented by a stunning blue color." data-images="Big%20Blue%20-%20Ashe%20Juniper/BB%20Hero%20.jpeg,Big%20Blue%20-%20Ashe%20Juniper/BB%20support%20.jpeg,Big%20Blue%20-%20Ashe%20Juniper/BB%20support%202%20.jpeg" tabindex="0" style="background-image: url('Big%20Blue%20-%20Ashe%20Juniper/BB%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Refuse Vase - Various" data-description="A testament to our wasteless mission: leftover epoxy is poured into a refuse receptacle filled with branches and wooden offcuts that might otherwise be discarded. The result is a one-of-a-kind case made entirely from reclaimed materials, finished and protected with UV epoxy." data-images="Refuse%20Vase%20-%20Various/RV%20Hero%20.jpeg,Refuse%20Vase%20-%20Various/RV%20support%20.jpeg,Refuse%20Vase%20-%20Various/RV%20support%202.jpeg" tabindex="0" style="background-image: url('Refuse%20Vase%20-%20Various/RV%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall featured split-right" data-species="Split - Texas Red Oak" data-description="Our second completed project, created from a large branch that split naturally. The two pieces were cast together around an old LED strip to form a one-of-a-kind lampstand, with a remote receiver hidden beneath the hollowed base. Mini rocks were cast into the stand to conceal the wiring, and the entire piece was finished with UV epoxy for a beautiful shine. Recently sold for a high price." data-images="Split%20-%20Texas%20Red%20Oak/S%20hero.png,Split%20-%20Texas%20Red%20Oak/S%20support.png,Split%20-%20Texas%20Red%20Oak/S%20support%202%20.png,Split%20-%20Texas%20Red%20Oak/S%20support%203.png,Split%20-%20Texas%20Red%20Oak/S%20support%204.png,Split%20-%20Texas%20Red%20Oak/S%20support%205.png,Split%20-%20Texas%20Red%20Oak/S%20support%206.jpeg,Split%20-%20Texas%20Red%20Oak/S%20support%207.jpeg,Split%20-%20Texas%20Red%20Oak/S%20support%208.jpeg" tabindex="0" style="background-image: url('Split%20-%20Texas%20Red%20Oak/S%20hero.png'); background-size:cover; background-position:center;"></figure>
-          <figure class="card landscape" data-species="Watch Stand - Texas Red Oak" data-description="A display stand for bracelets and watches, made from split Texas red oak and filled with turquoise-tinted epoxy. The base is finished with UV epoxy for a durable, polished shine." data-images="Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20Hero%20.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20support.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20support%202.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20supoprt%204.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20support%205.jpeg" tabindex="0" style="background-image: url('Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20Hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="TV Stand - Refurbished Furniture" data-description="A custom-made commissioned TV stand created from refurbished furniture. An engraved cobalt-blue mica river runs through the middle, adding a bold handmade detail to the restored piece." data-images="TV%20Stand%20-%20Refurb/TV%20hero%20.jpeg,TV%20Stand%20-%20Refurb/TV%20support%20.jpeg,TV%20Stand%20-%20Refurb/TV%20support%202.jpeg,TV%20Stand%20-%20Refurb/TV%20support%203.jpeg,TV%20Stand%20-%20Refurb/TV%20support%204.jpeg,TV%20Stand%20-%20Refurb/TV%20support%205.jpeg" tabindex="0" style="background-image: url('TV%20Stand%20-%20Refurb/TV%20hero%20.jpeg'); background-size:cover; background-position:center;"></figure>
-          <figure class="card tall" data-species="Cutting Board - Cedar" data-description="Made as a gift, this cutting board began as a large cut of cedar personally delivered from East Texas. It is all natural, hand-sanded, and rubbed down with oil, preserving the wood's character and exposing the striking red heart of East Texas cedar." data-images="Cutting%20Board%20-%20Cedar/CB%20hero.png,Cutting%20Board%20-%20Cedar/CB%20support.png,Cutting%20Board%20-%20Cedar/CB%20support2.png" tabindex="0" style="background-image: url('Cutting%20Board%20-%20Cedar/CB%20hero.png'); background-size:cover; background-position:center;"></figure>
+          <figure class="card tall" data-species="Ash Tray - Ashe Juniper"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A gift made to be used as an ashtray. Originally a solid piece of ashe juniper, it split during the turning process and was cast in clear epoxy to highlight the split and add strength. Mini rocks were cast separately to create a removable, cleanable rock bottom for the bowl."
+            data-images="Ash%20Tray%20-%20Ashe%20Juniper/AT%20hero%20.jpeg,Ash%20Tray%20-%20Ashe%20Juniper/At%20support%202.jpeg,Ash%20Tray%20-%20Ashe%20Juniper/AT%20support%203.jpeg,Ash%20Tray%20-%20Ashe%20Juniper/AT%20Support%204.jpeg"
+            tabindex="0" aria-hidden="false"
+            style="background-image: url('Ash%20Tray%20-%20Ashe%20Juniper/AT%20hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured" data-species="Rail Lamp - Reuse"
+            data-description="A new life for a piece of wood from a guard rail damaged in a car accident. The wood was paired with a recycled lamp stand, a warm LED bulb, and a repurposed lamp shade painted to echo its charred top. Finished and protected with UV epoxy, this important project turns damage into a distinctive lamp."
+            data-images="Rail%20Lamp%20-%20Reuse/RL%20hero%20.png,Rail%20Lamp%20-%20Reuse/RL%20support%20.png,Rail%20Lamp%20-%20Reuse/RL%20support%202.png"
+            tabindex="0"
+            style="background-image: url('Rail%20Lamp%20-%20Reuse/RL%20hero%20.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured" data-species="Lamp - Texas Red Oak"
+            data-description="Candelabra‑base lamp with a warm, low‑lumen bulb, reclaimed shade, and stained in‑house with Texas persimmon — hand‑polished."
+            data-images="Lamp%20-%20Texas%20Red%20Oak/LTRO%20hero.jpeg,Lamp%20-%20Texas%20Red%20Oak/LTRO%20support.jpeg,Lamp%20-%20Texas%20Red%20Oak/LTRO%20support2.jpeg"
+            tabindex="0"
+            style="background-image: url('Lamp%20-%20Texas%20Red%20Oak/LTRO%20hero.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Bulb Vase - Crepe Myrtle"
+            data-description="A medium-sized vase made from crepe myrtle trimmings cast in a gradient from blue to green. The piece exposes the wood's varied grains and is finished with UV epoxy for a brilliant shine."
+            data-images="Bulb%20Vase%20-%20Crepe%20Myrtle/BV%20Hero%20.jpeg,Bulb%20Vase%20-%20Crepe%20Myrtle/BV%20Support%20.jpeg"
+            tabindex="0"
+            style="background-image: url('Bulb%20Vase%20-%20Crepe%20Myrtle/BV%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="B&amp;W - Crepe Myrtle"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Crepe myrtle trimmings cast in a striking light-to-dark gradient, made as a family gift and finished with UV epoxy."
+            data-images="B%26W%20-%20Crepe%20Myrtle/BW%20hero.jpeg,B%26W%20-%20Crepe%20Myrtle/BW%20support.jpeg"
+            tabindex="0"
+            style="background-image: url('B%26W%20-%20Crepe%20Myrtle/BW%20hero.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Cedar Bulb - Ashe Juniper"
+            data-description="A customer favorite, this vase is often enjoyed as a shelf piece because of its distinctive shape. Made from ashe juniper, it features subtle holes and pockets filled with colorful accents that let the wood remain the focus. Finished with polishing paste."
+            data-images="Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20Hero%20.jpeg,Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20support.jpeg,Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20support%202.jpeg"
+            tabindex="0"
+            style="background-image: url('Cedar%20Bulb%20-%20Ashe%20Juniper/CB%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card medium" data-species="2 Roses - Ink"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A handmade 2 x 3 ink drawing on felt-tip pen, created as a personal gift in a grayscale style reminiscent of a Georgia O'Keeffe painting. Every shape is made using only cross-hatching, building the roses through layered lines and tonal texture."
+            data-images="2%20Roses%20-%20Ink/R%20hero.png,2%20Roses%20-%20Ink/R%20support.JPEG" tabindex="0"
+            style="background-image: url('2%20Roses%20-%20Ink/R%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Purple Vase - Cedar"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A commissioned gift made from cedar branches cast in deep purple mica epoxy with soft pearl-like reflections. One of our more distinctive pieces, it is finished with UV epoxy."
+            data-images="Purple%20Vase%20-%20Cedar/PV%20hero.png,Purple%20Vase%20-%20Cedar/PV%20support.JPG"
+            tabindex="0"
+            style="background-image: url('Purple%20Vase%20-%20Cedar/PV%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Wood &amp; Cloud - Redwood"
+            data-description="A beautiful small vase made from redwood branches set in a subtle gradient from white to light blue. The colorful speckled effect and swirling epoxy evoke clouds in the sky, while mineral oil preserves the natural look of the wood."
+            data-images="Wood%20%26%20Cloud%20-%20Redwood/WC%20Hero%20.jpeg,Wood%20%26%20Cloud%20-%20Redwood/WC%20support.jpeg,Wood%20%26%20Cloud%20-%20Redwood/WC%20support%202.jpeg,Wood%20%26%20Cloud%20-%20Redwood/WC%20support%203%20.jpeg"
+            tabindex="0"
+            style="background-image: url('Wood%20%26%20Cloud%20-%20Redwood/WC%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card square" data-species="Red Dish - Redwood"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Red Dish — broken pieces from a redwood branch were cast together to make this simple kitchen dish or bowl; polished and protected with paste and wax."
+            data-images="Red%20Dish%20-%20Redwood/RD%20hero%20.png,Red%20Dish%20-%20Redwood/RD%20support%20.jpg"
+            tabindex="0"
+            style="background-image: url('Red%20Dish%20-%20Redwood/RD%20hero%20.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured" data-species="Honoring Kerrville"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Honoring Kerrville — salvaged from the flood site and remade as a charity donation; ashe juniper cast in epoxy and finished with UV epoxy."
+            data-images="Honoring%20Kerrville%20-%20Ashe%20Juniper/BV%20Hero.png,Honoring%20Kerrville%20-%20Ashe%20Juniper/BV%20support.JPEG"
+            tabindex="0"
+            style="background-image: url('Honoring%20Kerrville%20-%20Ashe%20Juniper/BV%20Hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card landscape" data-species="Black Vase - Epoxy Resin"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Created from an accident: a mixed cup of epoxy was left out too long and hardened before any wood could be inserted. The accident became a new project, turned into a desk pencil holder from epoxy with black paste and reflective pearl-white mica powder."
+            data-images="Black%20Vase%20-%20Epoxy%20Resin/BV%20Hero%20.jpeg,Black%20Vase%20-%20Epoxy%20Resin/BV%20Support%20.jpeg,Black%20Vase%20-%20Epoxy%20Resin/BV%20support%202%20.jpeg"
+            tabindex="0"
+            style="background-image: url('Black%20Vase%20-%20Epoxy%20Resin/BV%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured" data-species="The Pawn - Decayed Oak"
+            data-description="Our first completed project and an important piece in the collection. A rotted oak section was carefully picked clean of decayed wood, then painted with cobalt blue mica and cast in dark aqua-blue epoxy. Set over an LED puck light at the base, it creates an aquarium-like scene within the piece. Finished with UV epoxy for a beautiful shine."
+            data-images="./The%20Pawn%20-%20Decayed%20Oak/TP%20hero.png,./The%20Pawn%20-%20Decayed%20Oak/TP%20support.png,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%202.jpeg,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%203.jpeg,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%204.jpeg,./The%20Pawn%20-%20Decayed%20Oak/TP%20support%205.jpeg"
+            tabindex="0"
+            style="background-image: url('./The%20Pawn%20-%20Decayed%20Oak/TP%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card square" data-species="Candle Holder - Ashe Juniper"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Small, intimate candle holder turned from ashe juniper and finished with protective paste and wax — a quick, intimate counter to our larger projects."
+            data-images="Candle%20Holder%20-%20Ashe%20Juniper/CH%20Hero.png,Candle%20Holder%20-%20Ashe%20Juniper/CH%20support.jpg"
+            tabindex="0"
+            style="background-image: url('Candle%20Holder%20-%20Ashe%20Juniper/CH%20Hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card landscape" data-species="Nut Dish - Oak Trimmings"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Nut Dish — made from oak trimmings collected around the area as a commissioned dish for a relative; finished with UV epoxy and poured with a cobalt blue epoxy."
+            data-images="Nut%20Dish%20-%20Oak%20Trimmings/ND%20hero.png,Nut%20Dish%20-%20Oak%20Trimmings/ND%20support.jpg"
+            tabindex="0"
+            style="background-image: url('Nut%20Dish%20-%20Oak%20Trimmings/ND%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card landscape" data-species="Sugar Bowl - Ashe Juniper"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Local ashe juniper bowl with subtle blue epoxy pockets; finished with protective paste and wax."
+            data-images="Sugar%20Bowl%20-%20Ashe%20Juniper/SB%20hero.png,Sugar%20Bowl%20-%20Ashe%20Juniper/SB%20support.jpg"
+            tabindex="0"
+            style="background-image: url('Sugar%20Bowl%20-%20Ashe%20Juniper/SB%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured" data-species="Frozen - Live Oak"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Candelabra‑base commission from a freeze‑snapped live oak branch — charred tips and tinted epoxy preserve the dramatic form; hand‑finished."
+            data-images="Frozen%20-%20Live%20Oak/F%20hero.png,Frozen%20-%20Live%20Oak/F%20support%202.png,Frozen%20-%20Live%20Oak/F%20support.jpg"
+            tabindex="0"
+            style="background-image: url('Frozen%20-%20Live%20Oak/F%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Skinny Blue - Cedar"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Skinny Blue — a turned cedar vase finished with UV epoxy; a practice in lathing smaller pieces."
+            data-images="Skinny%20Blue%20-%20Cedar/SB%20hero%20.png,Skinny%20Blue%20-%20Cedar/SB%20support%20.jpg"
+            tabindex="0"
+            style="background-image: url('Skinny%20Blue%20-%20Cedar/SB%20hero%20.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="End Table - Recycle"
+            data-description="A dark-stained end table that was rescued from the discard pile and given a new life. The solid paint was sanded away, then a white base was added and sanded again to create a rustic finish. Divots in the top were filled with coffee-colored epoxy, and polyurethane protects the restored wood."
+            data-images="End%20Table%20-%20Recycle/ET%20Hero.png,End%20Table%20-%20Recycle/ET%20support.jpeg,End%20Table%20-%20Recycle/ET%20support%202.jpeg,End%20Table%20-%20Recycle/ET%20support%203.jpeg,End%20Table%20-%20Recycle/ET%20support%204.png"
+            tabindex="0"
+            style="background-image: url('End%20Table%20-%20Recycle/ET%20Hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Flower Vase - Live Oak"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A small live oak flower vase made as a commissioned gift for a friend. Finished with glossy UV epoxy, its natural holes are filled with deep-pour epoxy tinted with black paste, creating a dramatic contrast between the wood and its voids."
+            data-images="Flower%20Vase%20-%20Live%20Oak/FV%20hero%20.png,Flower%20Vase%20-%20Live%20Oak/FV%20support%20.jpg"
+            tabindex="0"
+            style="background-image: url('Flower%20Vase%20-%20Live%20Oak/FV%20hero%20.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Brown Vase - Live Oak"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A recently sold live oak flower vase with brown epoxy pockets carefully blended into the wood's natural grain and color. Polished with finishing wax."
+            data-images="Brown%20Vase%20-%20Live%20Oak/BV%20hero.jpeg,Brown%20Vase%20-%20Live%20Oak/BV%20support.jpeg"
+            tabindex="0"
+            style="background-image: url('Brown%20Vase%20-%20Live%20Oak/BV%20hero.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured fossil-lamp" data-species="Fossil Lamp - Oak"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A personal favorite and our highest-selling product, made from a section of rotting firewood with the back hollowed out to reveal its natural character. It holds a low-lumen candelabra-base bulb and is cast in amber-colored epoxy, with its holes filled using UV epoxy. Mounted to a recycled lamp stand and finished with protective polishing paste."
+            data-images="Fossil%20Lamp%20-%20Oak/FL%20Hero.png,Fossil%20Lamp%20-%20Oak/FL%20support.png,Fossil%20Lamp%20-%20Oak/FL%20support%202.jpeg,Fossil%20Lamp%20-%20Oak/FL%20support%203.jpeg,Fossil%20Lamp%20-%20Oak/FL%20support%204.jpeg"
+            tabindex="0"
+            style="background-image: url('Fossil%20Lamp%20-%20Oak/FL%20Hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Mini Blue - Ashe Juniper"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A quick, playful project made from leftover epoxy from another piece, with an ashe juniper branch placed into the refuse container to create a mini vase or bowl. This piece uses bright blue mica and is finished with mineral oil to preserve the branch's natural look."
+            data-images="Mini%20Blue%20-%20Ashe%20Juniper/MB%20Hero%20.jpeg,Mini%20Blue%20-%20Ashe%20Juniper/MB%20Support%20.jpeg"
+            tabindex="0"
+            style="background-image: url('Mini%20Blue%20-%20Ashe%20Juniper/MB%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card landscape" data-species="Mini Flame - Texas Red Oak"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A small, intimate piece from the mini series, hollowed into a teacup candle holder. Polished and buffed to help protect the wood from heat, it was made without pouring any epoxy, letting the natural wood stand on its own."
+            data-images="Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20Hero%20.jpeg,Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20support%20.jpeg,Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20support%202%20.jpeg"
+            tabindex="0"
+            style="background-image: url('Mini%20Flame%20-%20Texas%20Red%20Oak/MF%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Mini Red - Ashe Juniper"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A cute little vase from the mini series, made from an ashe juniper branch cast in dazzling red epoxy. Recently sold and a customer favorite, it is finished with mineral oil to preserve the natural character of the wood."
+            data-images="Mini%20Red%20-%20Ashe%20Juniper/MR%20hero%20.jpeg,Mini%20Red%20-%20Ashe%20Juniper/MR%20support%20.jpeg,Mini%20Red%20-%20Ashe%20Juniper/MR%20support%202.jpeg,Mini%20Red%20-%20Ashe%20Juniper/MR%20support%203.jpeg"
+            tabindex="0"
+            style="background-image: url('Mini%20Red%20-%20Ashe%20Juniper/MR%20hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card landscape featured" data-species="No. 1&amp;2 - Recycle"
+            data-description="A pair of chairs rescued from the roadside after being neglected and discarded. Rotted and chipped paint was sanded away, new cushions were made with a stylish textile, and the painted numbers on the backs were preserved under polyurethane. Cracks were repaired with wood glue and sawdust, and new nails added support. Among our most inquired-after pieces, they are still available."
+            data-images="No.%201%262%20-%20Recycle/1%262%20Hero.png,No.%201%262%20-%20Recycle/1%262%20Support%20.jpeg,No.%201%262%20-%20Recycle/1%262%20Support%202%20.jpeg,No.%201%262%20-%20Recycle/1%262%20support%203.jpeg,No.%201%262%20-%20Recycle/1%262%20support%204.jpeg"
+            tabindex="0"
+            style="background-image: url('No.%201%262%20-%20Recycle/1%262%20Hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured" data-species="Big Blue - Ashe Juniper"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Recently sold at a vendor day, this large piece of ashe juniper was turned into a large hollowed vase for flowers or whatever you can imagine. Its shape exposes the beautiful topography of the wood, complemented by a stunning blue color."
+            data-images="Big%20Blue%20-%20Ashe%20Juniper/BB%20Hero%20.jpeg,Big%20Blue%20-%20Ashe%20Juniper/BB%20support%20.jpeg,Big%20Blue%20-%20Ashe%20Juniper/BB%20support%202%20.jpeg"
+            tabindex="0"
+            style="background-image: url('Big%20Blue%20-%20Ashe%20Juniper/BB%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Refuse Vase - Various"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A testament to our wasteless mission: leftover epoxy is poured into a refuse receptacle filled with branches and wooden offcuts that might otherwise be discarded. The result is a one-of-a-kind case made entirely from reclaimed materials, finished and protected with UV epoxy."
+            data-images="Refuse%20Vase%20-%20Various/RV%20Hero%20.jpeg,Refuse%20Vase%20-%20Various/RV%20support%20.jpeg,Refuse%20Vase%20-%20Various/RV%20support%202.jpeg"
+            tabindex="0"
+            style="background-image: url('Refuse%20Vase%20-%20Various/RV%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall featured split-right" data-species="Split - Texas Red Oak"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Our second completed project, created from a large branch that split naturally. The two pieces were cast together around an old LED strip to form a one-of-a-kind lampstand, with a remote receiver hidden beneath the hollowed base. Mini rocks were cast into the stand to conceal the wiring, and the entire piece was finished with UV epoxy for a beautiful shine. Recently sold for a high price."
+            data-images="Split%20-%20Texas%20Red%20Oak/S%20hero.png,Split%20-%20Texas%20Red%20Oak/S%20support.png,Split%20-%20Texas%20Red%20Oak/S%20support%202%20.png,Split%20-%20Texas%20Red%20Oak/S%20support%203.png,Split%20-%20Texas%20Red%20Oak/S%20support%204.png,Split%20-%20Texas%20Red%20Oak/S%20support%205.png,Split%20-%20Texas%20Red%20Oak/S%20support%206.jpeg,Split%20-%20Texas%20Red%20Oak/S%20support%207.jpeg,Split%20-%20Texas%20Red%20Oak/S%20support%208.jpeg"
+            tabindex="0"
+            style="background-image: url('Split%20-%20Texas%20Red%20Oak/S%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card landscape" data-species="Watch Stand - Texas Red Oak"
+            data-description="A display stand for bracelets and watches, made from split Texas red oak and filled with turquoise-tinted epoxy. The base is finished with UV epoxy for a durable, polished shine."
+            data-images="Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20Hero%20.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20support.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20support%202.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20supoprt%204.jpeg,Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20support%205.jpeg"
+            tabindex="0"
+            style="background-image: url('Watch%20Stand%20-%20Texas%20Red%20Oak/WS%20Hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="TV Stand - Refurbished Furniture"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="A custom-made commissioned TV stand created from refurbished furniture. An engraved cobalt-blue mica river runs through the middle, adding a bold handmade detail to the restored piece."
+            data-images="TV%20Stand%20-%20Refurb/TV%20hero%20.jpeg,TV%20Stand%20-%20Refurb/TV%20support%20.jpeg,TV%20Stand%20-%20Refurb/TV%20support%202.jpeg,TV%20Stand%20-%20Refurb/TV%20support%203.jpeg,TV%20Stand%20-%20Refurb/TV%20support%204.jpeg,TV%20Stand%20-%20Refurb/TV%20support%205.jpeg"
+            tabindex="0"
+            style="background-image: url('TV%20Stand%20-%20Refurb/TV%20hero%20.jpeg'); background-size:cover; background-position:center;">
+          </figure>
+          <figure class="card tall" data-species="Cutting Board - Cedar"
+            data-notice='This piece has sold and is unavailable. Click "Inquire" to commission a similar piece.'
+            data-description="Made as a gift, this cutting board began as a large cut of cedar personally delivered from East Texas. It is all natural, hand-sanded, and rubbed down with oil, preserving the wood's character and exposing the striking red heart of East Texas cedar."
+            data-images="Cutting%20Board%20-%20Cedar/CB%20hero.png,Cutting%20Board%20-%20Cedar/CB%20support.png,Cutting%20Board%20-%20Cedar/CB%20support2.png"
+            tabindex="0"
+            style="background-image: url('Cutting%20Board%20-%20Cedar/CB%20hero.png'); background-size:cover; background-position:center;">
+          </figure>
         </div>
         <div class="custom-gifts-section">
           <div class="eyebrow">Custom Gifts</div>
           <div class="grid">
-            <figure class="card landscape" data-species="Custom Bowls - Epoxy Resin" data-description="Cute, small lidded bowls that make thoughtful gifts and are constantly loved by customers. Choose any color, tint, or level of transparency, then tell us what you like and we can make it." data-images="Custom%20Bowls%20-%20Epoxy%20Resin/CB%20Hero%20.png" tabindex="0" style="background-image: url('Custom%20Bowls%20-%20Epoxy%20Resin/CB%20Hero%20.png'); background-size:cover; background-position:center;"></figure>
-            <figure class="card landscape" data-species="Custom Paperweights - Epoxy Resin" data-description="Custom paperweights that can also serve as coasters. If you have a meaningful object, we can cast it in epoxy, with colors and tints tailored to your request." data-images="Custom%20Paperweights%20-%20Epoxy%20Resin/CP%20hero.png" tabindex="0" style="background-image: url('Custom%20Paperweights%20-%20Epoxy%20Resin/CP%20hero.png'); background-size:cover; background-position:center;"></figure>
+            <figure class="card landscape" data-species="Custom Bowls - Epoxy Resin"
+              data-description="Cute, small lidded bowls that make thoughtful gifts and are constantly loved by customers. Choose any color, tint, or level of transparency, then tell us what you like and we can make it."
+              data-images="Custom%20Bowls%20-%20Epoxy%20Resin/CB%20Hero%20.png" tabindex="0"
+              style="background-image: url('Custom%20Bowls%20-%20Epoxy%20Resin/CB%20Hero%20.png'); background-size:cover; background-position:center;">
+            </figure>
+            <figure class="card landscape" data-species="Custom Paperweights - Epoxy Resin"
+              data-description="Custom paperweights that can also serve as coasters. If you have a meaningful object, we can cast it in epoxy, with colors and tints tailored to your request."
+              data-images="Custom%20Paperweights%20-%20Epoxy%20Resin/CP%20hero.png" tabindex="0"
+              style="background-image: url('Custom%20Paperweights%20-%20Epoxy%20Resin/CP%20hero.png'); background-size:cover; background-position:center;">
+            </figure>
           </div>
         </div>
         <div class="in-works-section">
           <div class="eyebrow">In the Works</div>
           <div class="grid">
-            <figure class="card landscape featured" data-species="Bar Project - Recycle" data-description="This massive bar was rescued after being left neglected in front of a driveway. Its original handmade woodworking is still full of character, and we are carefully refurbishing it by repairing the chips, breaks, and gaps in the top with a beautiful epoxy fill. It is looking for a new home, and we can provide dimensions, specifications, and any other details by email. Contact us to arrange an in-person visit or to make this truly one-of-a-kind piece yours." data-images="Bar%20Rescue%20-%20Recycle/BP%20Hero.jpeg,Bar%20Rescue%20-%20Recycle/BP%20support.jpeg,Bar%20Rescue%20-%20Recycle/BP%20support%202.jpeg,Bar%20Rescue%20-%20Recycle/BP%20support%203.jpeg" tabindex="0" style="background-image: url('Bar%20Rescue%20-%20Recycle/BP%20Hero.jpeg'); background-size:cover; background-position:center;"></figure>
+            <figure class="card landscape featured" data-species="Bar Project - Recycle"
+              data-description="This massive bar was rescued after being left neglected in front of a driveway. Its original handmade woodworking is still full of character, and we are carefully refurbishing it by repairing the chips, breaks, and gaps in the top with a beautiful epoxy fill. It is looking for a new home, and we can provide dimensions, specifications, and any other details by email. Contact us to arrange an in-person visit or to make this truly one-of-a-kind piece yours."
+              data-images="Bar%20Rescue%20-%20Recycle/BP%20Hero.jpeg,Bar%20Rescue%20-%20Recycle/BP%20support.jpeg,Bar%20Rescue%20-%20Recycle/BP%20support%202.jpeg,Bar%20Rescue%20-%20Recycle/BP%20support%203.jpeg"
+              tabindex="0"
+              style="background-image: url('Bar%20Rescue%20-%20Recycle/BP%20Hero.jpeg'); background-size:cover; background-position:center;">
+            </figure>
           </div>
         </div>
       </div>
@@ -301,7 +1156,9 @@ main, nav{position:relative;z-index:1}
 
     <section id="about" class="about">
       <div class="container narrow">
-        <p>We make custom pieces locally in the Texas Hill Country — handcrafting quality items from wood and epoxy. We accept commissions and will work with you to create a unique, handmade piece. Many pieces have already been sold or commissioned; use the "Inquire" button in any tile to email us about creating a similar piece.</p>
+        <p>We make custom pieces locally in the Texas Hill Country — handcrafting quality items from wood and epoxy. We
+          accept commissions and will work with you to create a unique, handmade piece. Many pieces have already been
+          sold or commissioned; use the "Inquire" button in any tile to email us about creating a similar piece.</p>
       </div>
     </section>
 
@@ -317,7 +1174,8 @@ main, nav{position:relative;z-index:1}
           <input id="email" name="email" type="email" placeholder="your@email.com" required>
 
           <label for="message">What do you have in mind?</label>
-          <textarea id="message" name="message" rows="5" placeholder="Tell us about size, wood, timeline…" required></textarea>
+          <textarea id="message" name="message" rows="5" placeholder="Tell us about size, wood, timeline…"
+            required></textarea>
 
           <button id="commission-submit" class="pill" type="submit">Get in touch</button>
         </form>
@@ -329,7 +1187,8 @@ main, nav{position:relative;z-index:1}
       <div class="modal-backdrop"></div>
       <div class="modal-content">
         <button class="modal-close" aria-label="Close modal">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -347,6 +1206,7 @@ main, nav{position:relative;z-index:1}
           <div class="modal-actions">
             <button id="modal-inquire" class="pill" type="button">Inquire</button>
           </div>
+          <p id="modal-notice" class="modal-notice" hidden></p>
         </div>
       </div>
     </div>
@@ -355,11 +1215,18 @@ main, nav{position:relative;z-index:1}
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand" aria-label="Crossing J Workshop logo stamp">
-        <svg class="site-logo" viewBox="0 0 2550 3300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="img">
+        <svg class="site-logo" viewBox="0 0 2550 3300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+          focusable="false" role="img">
           <g>
-            <path d="M1548.533,1427.681c-14.442,-0.272 -101.142,-1.907 -180.561,0.416c-9.416,0.275 -7.928,9.574 -8.154,23.306c-4.874,296.023 25.243,476.471 -70.134,574.308c-90.104,92.428 -312.274,88.774 -426.689,33.079c-129.269,-62.926 -128.179,-230.111 -125.563,-240.813c1.893,-7.748 3.507,-11.044 97.502,-20.798c21.142,-2.194 15.665,8.27 18.161,29.34c10.939,92.33 53.518,120.237 62.969,126.431c35.829,23.483 114.449,33.084 129.859,32.795c156.212,-2.936 168.619,-57.861 179.505,-98.546c13.935,-52.082 8.052,-453.374 5.496,-457.277c-4.094,-6.252 -345.424,-0.217 -351.785,-3.357c-8.366,-4.129 -4.12,-120.325 -2.429,-122.171c7.498,-8.185 341.441,0.847 352.925,-5.133c9.413,-4.901 -0.193,-221.603 5.602,-227.951c5.717,-6.263 113.472,-2.529 116.072,-2.348c9.166,0.637 8.119,16.876 8.438,46.383c1.773,163.683 -6.033,184.124 8.346,185.609c68.324,7.056 284.871,-25.86 390.491,57.312c115.842,91.223 105.78,373.464 22.207,478.308c-74.05,92.896 -218.918,93.776 -222.573,83.631c-2.752,-7.637 -14.377,-97.059 -14.546,-102.191c-0.87,-26.372 198.914,29.682 187.036,-227.659c-6.88,-149.051 -68.082,-158.533 -182.172,-162.674Z" style="fill:currentColor;fill-opacity:0.99;"/>
-            <path d="M265.511,1735.475c27.985,-3.263 35.37,-2.553 63.687,0.076c137.609,181.437 275.218,362.873 412.827,544.31c140.454,184.407 542.142,715.109 546.013,717.601c7.629,4.913 7.403,-2.273 155.655,-195.778c64.197,-83.792 787.457,-1041.325 810.43,-1066.415c24.185,-2.273 33.146,-3.026 63.7,0.446c-22.133,24.704 -642.637,846.55 -953.948,1252.595c-55.188,71.982 -65.173,94.361 -89.345,72.876c-7.663,-6.811 -7.471,-6.991 -243.721,-317.411c-61.329,-80.584 -728.712,-957.491 -765.298,-1008.299Z" style="fill:currentColor;fill-opacity:0.99;"/>
-            <path d="M265.488,1564.18c53.302,-69.134 52.311,-69.795 659.795,-869.134c345.303,-454.356 343.066,-458.043 356.691,-462.82c25.895,-9.079 45.335,33.418 94.077,94.602c25.509,32.021 402.656,530.352 437.599,576.523c40.125,53.018 475.392,628.144 504.22,660.707c-34.839,2.812 -31.49,1.653 -66.231,-0.106c0.259,-1.419 -139.387,-182.253 -227.135,-299.407c-96.537,-128.888 -416.39,-549.425 -452.68,-597.139c-251.82,-331.089 -277.052,-366.559 -281.586,-366.183c-7.369,0.611 -820.608,1077.669 -890.048,1168.637c-66.334,86.9 -66.656,87.086 -68.077,94.276c-52.748,3.605 -54.106,1.003 -66.624,0.043Z" style="fill:currentColor;fill-opacity:0.99;"/>
+            <path
+              d="M1548.533,1427.681c-14.442,-0.272 -101.142,-1.907 -180.561,0.416c-9.416,0.275 -7.928,9.574 -8.154,23.306c-4.874,296.023 25.243,476.471 -70.134,574.308c-90.104,92.428 -312.274,88.774 -426.689,33.079c-129.269,-62.926 -128.179,-230.111 -125.563,-240.813c1.893,-7.748 3.507,-11.044 97.502,-20.798c21.142,-2.194 15.665,8.27 18.161,29.34c10.939,92.33 53.518,120.237 62.969,126.431c35.829,23.483 114.449,33.084 129.859,32.795c156.212,-2.936 168.619,-57.861 179.505,-98.546c13.935,-52.082 8.052,-453.374 5.496,-457.277c-4.094,-6.252 -345.424,-0.217 -351.785,-3.357c-8.366,-4.129 -4.12,-120.325 -2.429,-122.171c7.498,-8.185 341.441,0.847 352.925,-5.133c9.413,-4.901 -0.193,-221.603 5.602,-227.951c5.717,-6.263 113.472,-2.529 116.072,-2.348c9.166,0.637 8.119,16.876 8.438,46.383c1.773,163.683 -6.033,184.124 8.346,185.609c68.324,7.056 284.871,-25.86 390.491,57.312c115.842,91.223 105.78,373.464 22.207,478.308c-74.05,92.896 -218.918,93.776 -222.573,83.631c-2.752,-7.637 -14.377,-97.059 -14.546,-102.191c-0.87,-26.372 198.914,29.682 187.036,-227.659c-6.88,-149.051 -68.082,-158.533 -182.172,-162.674Z"
+              style="fill:currentColor;fill-opacity:0.99;" />
+            <path
+              d="M265.511,1735.475c27.985,-3.263 35.37,-2.553 63.687,0.076c137.609,181.437 275.218,362.873 412.827,544.31c140.454,184.407 542.142,715.109 546.013,717.601c7.629,4.913 7.403,-2.273 155.655,-195.778c64.197,-83.792 787.457,-1041.325 810.43,-1066.415c24.185,-2.273 33.146,-3.026 63.7,0.446c-22.133,24.704 -642.637,846.55 -953.948,1252.595c-55.188,71.982 -65.173,94.361 -89.345,72.876c-7.663,-6.811 -7.471,-6.991 -243.721,-317.411c-61.329,-80.584 -728.712,-957.491 -765.298,-1008.299Z"
+              style="fill:currentColor;fill-opacity:0.99;" />
+            <path
+              d="M265.488,1564.18c53.302,-69.134 52.311,-69.795 659.795,-869.134c345.303,-454.356 343.066,-458.043 356.691,-462.82c25.895,-9.079 45.335,33.418 94.077,94.602c25.509,32.021 402.656,530.352 437.599,576.523c40.125,53.018 475.392,628.144 504.22,660.707c-34.839,2.812 -31.49,1.653 -66.231,-0.106c0.259,-1.419 -139.387,-182.253 -227.135,-299.407c-96.537,-128.888 -416.39,-549.425 -452.68,-597.139c-251.82,-331.089 -277.052,-366.559 -281.586,-366.183c-7.369,0.611 -820.608,1077.669 -890.048,1168.637c-66.334,86.9 -66.656,87.086 -68.077,94.276c-52.748,3.605 -54.106,1.003 -66.624,0.043Z"
+              style="fill:currentColor;fill-opacity:0.99;" />
           </g>
         </svg>
       </div>
@@ -368,292 +1235,296 @@ main, nav{position:relative;z-index:1}
   </footer>
 
   <script>
-  (function(){
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    (function () {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
-    const hero = document.getElementById('hero');
-    const header = document.getElementById('site-header');
-    let forceHeaderHidden = false;
+      const hero = document.getElementById('hero');
+      const header = document.getElementById('site-header');
+      let forceHeaderHidden = false;
 
-    function hideHeader() {
-      header.classList.remove('visible');
-      header.setAttribute('aria-hidden', 'true');
-    }
-
-    function showHeader() {
-      header.classList.add('visible');
-      header.setAttribute('aria-hidden', 'false');
-    }
-
-    function updateHeaderByPointer(yPos) {
-      if (forceHeaderHidden) {
-        hideHeader();
-        return;
+      function hideHeader() {
+        header.classList.remove('visible');
+        header.setAttribute('aria-hidden', 'true');
       }
-      if (yPos < 80) {
-        showHeader();
-      } else {
-        hideHeader();
+
+      function showHeader() {
+        header.classList.add('visible');
+        header.setAttribute('aria-hidden', 'false');
       }
-    }
 
-    document.addEventListener('pointermove', function(e) {
-      updateHeaderByPointer(e.clientY);
-    });
-
-    document.addEventListener('mouseleave', function() {
-      hideHeader();
-    });
-
-    document.addEventListener('pointerleave', function() {
-      hideHeader();
-    });
-
-    if (hero) {
-      hero.addEventListener('pointerenter', function() {
-        if (!forceHeaderHidden) {
+      function updateHeaderByPointer(yPos) {
+        if (forceHeaderHidden) {
+          hideHeader();
+          return;
+        }
+        if (yPos < 80) {
+          showHeader();
+        } else {
           hideHeader();
         }
+      }
+
+      document.addEventListener('pointermove', function (e) {
+        updateHeaderByPointer(e.clientY);
       });
-    }
 
-    // Form: open mailto with the details
-    const form = document.getElementById('commission-form');
-    const submitBtn = document.getElementById('commission-submit');
+      document.addEventListener('mouseleave', function () {
+        hideHeader();
+      });
 
-    function sendMail(e){
-      if (e) e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const subject = encodeURIComponent('Commission request from ' + (name || 'Someone'));
-      const body = encodeURIComponent((message ? message + '\n\n' : '') + 'Reply to: ' + (email || ''));
-      // Use window.location to open the user's mail client
-      window.location.href = 'mailto:crossingjranch@gmail.com?subject=' + subject + '&body=' + body;
-    }
+      document.addEventListener('pointerleave', function () {
+        hideHeader();
+      });
 
-    // Keep submit handler (in case form is submitted via Enter)
-    form.addEventListener('submit', sendMail);
-    // Also attach a direct click handler to the button to ensure it works reliably
-    if (submitBtn) submitBtn.addEventListener('click', sendMail);
-
-    // Smooth in-page scrolling for anchors (handles fixed header offset)
-    function prefersReducedMotion() {
-      return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
-
-    function smoothScrollToHash(hash) {
-      if (!hash || hash === '#') return;
-      const id = hash.slice(1);
-      const target = document.getElementById(id);
-      if (!target) return;
-      const header = document.getElementById('site-header');
-      const headerHeight = header ? header.offsetHeight : 0;
-      const offset = headerHeight + 8; // small gap
-      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      if (prefersReducedMotion()) {
-        window.scrollTo(0, top);
-        history.pushState(null, '', hash);
-      } else {
-        const start = window.pageYOffset;
-        const distance = top - start;
-        const duration = Math.min(900, Math.max(450, Math.abs(distance) * 0.7));
-        const startTime = performance.now();
-        const easeInOut = progress => progress < 0.5
-          ? 4 * progress * progress * progress
-          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-
-        function animateScroll(currentTime) {
-          const progress = Math.min((currentTime - startTime) / duration, 1);
-          window.scrollTo(0, start + distance * easeInOut(progress));
-          if (progress < 1) window.requestAnimationFrame(animateScroll);
-        }
-
-        window.requestAnimationFrame(animateScroll);
-        try { history.pushState(null, '', hash); } catch (e) { /* ignore */ }
-      }
-    }
-
-    document.addEventListener('click', function(e){
-      const anchor = e.target.closest && e.target.closest('a[href^="#"]');
-      if (!anchor) return;
-      const href = anchor.getAttribute('href');
-      if (!href || href === '#') return;
-      const samePage = href.startsWith('#');
-      if (samePage) {
-        e.preventDefault();
-        smoothScrollToHash(href);
-      }
-    });
-
-    // If page loads with a hash, scroll to it smoothly (after a tick)
-    if (window.location.hash) {
-      // wait for layout to settle (images/fonts)
-      setTimeout(function(){ smoothScrollToHash(window.location.hash); }, 50);
-    }
-
-    // Modal for wood piece details
-    const modal = document.getElementById('piece-modal');
-    const backdrop = modal.querySelector('.modal-backdrop');
-    const closeBtn = modal.querySelector('.modal-close');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const sliderTrack = document.getElementById('slider-track');
-
-    let currentIndex = 0;
-    let currentImages = [];
-    let keyHandler = null;
-    let inquireHandler = null;
-
-    function openModal(card) {
-      modal.classList.remove('closing');
-      const species = card.dataset.species;
-      const description = card.dataset.description || 'Beautiful hand-turned piece.';
-      const imagesAttr = card.dataset.images || "";
-
-      forceHeaderHidden = true;
-      header.classList.remove('visible');
-      header.setAttribute('aria-hidden', 'true');
-
-      const scrollY = window.scrollY || window.pageYOffset;
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.top = '-' + scrollY + 'px';
-      document.body.style.left = '0';
-
-      modalTitle.textContent = species;
-      modalDescription.textContent = description;
-
-      // build image list
-      currentImages = imagesAttr.split(',').map(s => s.trim()).filter(Boolean);
-      if (currentImages.length === 0) {
-        // fallback: use a single colored pane matching the card background
-        const bgColor = window.getComputedStyle(card).backgroundColor;
-        sliderTrack.innerHTML = '<div class="slider-track-inner" style="transform:translateX(0)"><div style="width:100%;height:420px;background:'+bgColor+';border-radius:12px"></div></div>';
-      } else {
-        const inner = document.createElement('div');
-        inner.className = 'slider-track-inner';
-        currentImages.forEach(src => {
-          const slide = document.createElement('div');
-          slide.className = 'slide';
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = species;
-          slide.appendChild(img);
-          inner.appendChild(slide);
+      if (hero) {
+        hero.addEventListener('pointerenter', function () {
+          if (!forceHeaderHidden) {
+            hideHeader();
+          }
         });
-        sliderTrack.innerHTML = '';
-        sliderTrack.appendChild(inner);
       }
 
-      currentIndex = 0;
-      updateSlider();
+      // Form: open mailto with the details
+      const form = document.getElementById('commission-form');
+      const submitBtn = document.getElementById('commission-submit');
 
-      // keyboard navigation
-      keyHandler = function(e){
-        if (e.key === 'ArrowRight') { nextImage(); }
-        if (e.key === 'ArrowLeft') { prevImage(); }
-        if (e.key === 'Escape') { closeModal(); }
-      };
-      document.addEventListener('keydown', keyHandler);
-
-      modal.setAttribute('aria-hidden', 'false');
-      modal.classList.add('active');
-
-      // wire up inquire button
-      const inquireBtn = document.getElementById('modal-inquire');
-      if (inquireBtn) {
-        // remove previous handler if present
-        if (inquireHandler) { inquireBtn.removeEventListener('click', inquireHandler); inquireHandler = null; }
-        inquireHandler = function(e){
-          e.preventDefault();
-          const subject = encodeURIComponent(species + ' inquiry');
-          window.location.href = 'mailto:crossingjranch@gmail.com?subject=' + subject;
-        };
-        inquireBtn.addEventListener('click', inquireHandler);
+      function sendMail(e) {
+        if (e) e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const subject = encodeURIComponent('Commission request from ' + (name || 'Someone'));
+        const body = encodeURIComponent((message ? message + '\n\n' : '') + 'Reply to: ' + (email || ''));
+        // Use window.location to open the user's mail client
+        window.location.href = 'mailto:crossingjranch@gmail.com?subject=' + subject + '&body=' + body;
       }
-    }
 
-    function closeModal() {
-      if (!modal.classList.contains('active')) return;
+      // Keep submit handler (in case form is submitted via Enter)
+      form.addEventListener('submit', sendMail);
+      // Also attach a direct click handler to the button to ensure it works reliably
+      if (submitBtn) submitBtn.addEventListener('click', sendMail);
 
-      modal.classList.remove('active');
-      modal.classList.add('closing');
-      modal.setAttribute('aria-hidden', 'true');
+      // Smooth in-page scrolling for anchors (handles fixed header offset)
+      function prefersReducedMotion() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
 
-      forceHeaderHidden = false;
+      function smoothScrollToHash(hash) {
+        if (!hash || hash === '#') return;
+        const id = hash.slice(1);
+        const target = document.getElementById(id);
+        if (!target) return;
+        const header = document.getElementById('site-header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const offset = headerHeight + 8; // small gap
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        if (prefersReducedMotion()) {
+          window.scrollTo(0, top);
+          history.pushState(null, '', hash);
+        } else {
+          const start = window.pageYOffset;
+          const distance = top - start;
+          const duration = Math.min(900, Math.max(450, Math.abs(distance) * 0.7));
+          const startTime = performance.now();
+          const easeInOut = progress => progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
-      setTimeout(function(){
-        modal.classList.remove('closing');
+          function animateScroll(currentTime) {
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            window.scrollTo(0, start + distance * easeInOut(progress));
+            if (progress < 1) window.requestAnimationFrame(animateScroll);
+          }
 
-        const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
-        document.body.style.top = '';
-        document.body.style.left = '';
-        window.scrollTo(0, scrollY);
+          window.requestAnimationFrame(animateScroll);
+          try { history.pushState(null, '', hash); } catch (e) { /* ignore */ }
+        }
+      }
 
-        if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
-        sliderTrack.innerHTML = '';
-        currentImages = [];
-        currentIndex = 0;
-
-        const inquireBtn = document.getElementById('modal-inquire');
-        if (inquireBtn && inquireHandler) { inquireBtn.removeEventListener('click', inquireHandler); inquireHandler = null; }
-      }, 420);
-    }
-
-    function updateSlider(){
-      const inner = sliderTrack.querySelector('.slider-track-inner');
-      if (!inner) return;
-      inner.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
-    }
-
-    function nextImage(){
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      updateSlider();
-    }
-
-    function prevImage(){
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      updateSlider();
-    }
-
-    // Click on cards to open modal
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', function() {
-        openModal(this);
-      });
-      // Also allow enter key
-      card.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
+      document.addEventListener('click', function (e) {
+        const anchor = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!anchor) return;
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+        const samePage = href.startsWith('#');
+        if (samePage) {
           e.preventDefault();
-          openModal(this);
+          smoothScrollToHash(href);
         }
       });
-    });
 
-    // Close modal
-    closeBtn.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', closeModal);
-    // slider prev/next
-    const prevBtn = modal.querySelector('.slider-prev');
-    const nextBtn = modal.querySelector('.slider-next');
-    if (prevBtn) prevBtn.addEventListener('click', prevImage);
-    if (nextBtn) nextBtn.addEventListener('click', nextImage);
-    
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
+      // If page loads with a hash, scroll to it smoothly (after a tick)
+      if (window.location.hash) {
+        // wait for layout to settle (images/fonts)
+        setTimeout(function () { smoothScrollToHash(window.location.hash); }, 50);
       }
-    });
 
-  })();
+      // Modal for wood piece details
+      const modal = document.getElementById('piece-modal');
+      const backdrop = modal.querySelector('.modal-backdrop');
+      const closeBtn = modal.querySelector('.modal-close');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDescription = document.getElementById('modal-description');
+      const modalNotice = document.getElementById('modal-notice');
+      const sliderTrack = document.getElementById('slider-track');
+
+      let currentIndex = 0;
+      let currentImages = [];
+      let keyHandler = null;
+      let inquireHandler = null;
+
+      function openModal(card) {
+        modal.classList.remove('closing');
+        const species = card.dataset.species;
+        const description = card.dataset.description || 'Beautiful hand-turned piece.';
+        const imagesAttr = card.dataset.images || "";
+
+        forceHeaderHidden = true;
+        header.classList.remove('visible');
+        header.setAttribute('aria-hidden', 'true');
+
+        const scrollY = window.scrollY || window.pageYOffset;
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.style.left = '0';
+
+        modalTitle.textContent = species;
+        modalDescription.textContent = description;
+        modalNotice.textContent = card.dataset.notice || '';
+        modalNotice.hidden = !card.dataset.notice;
+
+        // build image list
+        currentImages = imagesAttr.split(',').map(s => s.trim()).filter(Boolean);
+        if (currentImages.length === 0) {
+          // fallback: use a single colored pane matching the card background
+          const bgColor = window.getComputedStyle(card).backgroundColor;
+          sliderTrack.innerHTML = '<div class="slider-track-inner" style="transform:translateX(0)"><div style="width:100%;height:420px;background:' + bgColor + ';border-radius:12px"></div></div>';
+        } else {
+          const inner = document.createElement('div');
+          inner.className = 'slider-track-inner';
+          currentImages.forEach(src => {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = species;
+            slide.appendChild(img);
+            inner.appendChild(slide);
+          });
+          sliderTrack.innerHTML = '';
+          sliderTrack.appendChild(inner);
+        }
+
+        currentIndex = 0;
+        updateSlider();
+
+        // keyboard navigation
+        keyHandler = function (e) {
+          if (e.key === 'ArrowRight') { nextImage(); }
+          if (e.key === 'ArrowLeft') { prevImage(); }
+          if (e.key === 'Escape') { closeModal(); }
+        };
+        document.addEventListener('keydown', keyHandler);
+
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('active');
+
+        // wire up inquire button
+        const inquireBtn = document.getElementById('modal-inquire');
+        if (inquireBtn) {
+          // remove previous handler if present
+          if (inquireHandler) { inquireBtn.removeEventListener('click', inquireHandler); inquireHandler = null; }
+          inquireHandler = function (e) {
+            e.preventDefault();
+            const subject = encodeURIComponent(species + ' inquiry');
+            window.location.href = 'mailto:crossingjranch@gmail.com?subject=' + subject;
+          };
+          inquireBtn.addEventListener('click', inquireHandler);
+        }
+      }
+
+      function closeModal() {
+        if (!modal.classList.contains('active')) return;
+
+        modal.classList.remove('active');
+        modal.classList.add('closing');
+        modal.setAttribute('aria-hidden', 'true');
+
+        forceHeaderHidden = false;
+
+        setTimeout(function () {
+          modal.classList.remove('closing');
+
+          const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10)) || 0;
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.width = '';
+          document.body.style.top = '';
+          document.body.style.left = '';
+          window.scrollTo(0, scrollY);
+
+          if (keyHandler) { document.removeEventListener('keydown', keyHandler); keyHandler = null; }
+          sliderTrack.innerHTML = '';
+          currentImages = [];
+          currentIndex = 0;
+
+          const inquireBtn = document.getElementById('modal-inquire');
+          if (inquireBtn && inquireHandler) { inquireBtn.removeEventListener('click', inquireHandler); inquireHandler = null; }
+        }, 420);
+      }
+
+      function updateSlider() {
+        const inner = sliderTrack.querySelector('.slider-track-inner');
+        if (!inner) return;
+        inner.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+      }
+
+      function nextImage() {
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        updateSlider();
+      }
+
+      function prevImage() {
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        updateSlider();
+      }
+
+      // Click on cards to open modal
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function () {
+          openModal(this);
+        });
+        // Also allow enter key
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(this);
+          }
+        });
+      });
+
+      // Close modal
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      // slider prev/next
+      const prevBtn = modal.querySelector('.slider-prev');
+      const nextBtn = modal.querySelector('.slider-next');
+      if (prevBtn) prevBtn.addEventListener('click', prevImage);
+      if (nextBtn) nextBtn.addEventListener('click', nextImage);
+
+      // Close on Escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+
+    })();
   </script>
 </body>
+
 </html>
